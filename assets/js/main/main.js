@@ -6,7 +6,7 @@ if (window.location.href.indexOf("mtd") > -1) {
     });
 
     var table = $('#tmtd').DataTable( {
-      dom: 'frtip',
+      dom: 'Bfrtip',
       "ajax": '../../content/data/mtddata.php',
       initComplete: function (settings, json) {
         $( "#overlay" ).fadeOut(500, function() {
@@ -23,7 +23,26 @@ if (window.location.href.indexOf("mtd") > -1) {
             }
           });
         });
-      }
+      },
+      buttons: [
+        {
+          extend: "excel",
+          className: "btn btn-sm btn-primary",
+          text: 'Export',
+          filename: 'Sales Report',
+          init: function(api, node, config) { $(node).removeClass('dt-button') }
+        },
+        {
+          extend: "print",
+          className: "btn btn-sm btn-primary",
+          text: 'Print',
+          title: function(){
+            var printTitle = 'Sales Report';
+            return printTitle
+          },
+          init: function(api, node, config) { $(node).removeClass('dt-button') }
+        }
+      ]
     });
   });
 }
