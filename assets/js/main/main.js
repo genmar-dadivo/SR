@@ -41,7 +41,15 @@ if (window.location.href.indexOf("mtd") > -1) {
             return printTitle
           },
           init: function(api, node, config) { $(node).removeClass('dt-button') }
-        }
+        },
+        {
+          className: "btn btn-sm btn-primary",
+          text: 'Backup Database',
+          action: function ( e, dt, node, config ) {
+            //$('#mdlAddsalesorder').modal('show');
+            backupdb();
+          }
+        },
       ]
     });
   });

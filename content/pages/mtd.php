@@ -16,7 +16,6 @@
 <body>
 	<div id="overlay">
 	</div>
-	<a onclick="backupdb();" class="pointer general-link"> Backup database </a>
 	<div style="height: 100px;"></div>
 	<div class="container">
 		<div class="row">
