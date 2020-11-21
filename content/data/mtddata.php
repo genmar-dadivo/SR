@@ -49,11 +49,11 @@ if ($stm->rowCount() >= 1) {
 
         // get item details
         $ITEM_NO = $row['ITEM_NO'];
-        $sqlitem = "SELECT * FROM product WHERE item_no = '$ITEM_NO' LIMIT 1";
+        $sqlitem = "SELECT * FROM product WHERE ITEM_NO = '$ITEM_NO' LIMIT 1";
         $stmitem = $con->prepare($sqlitem);
         $stmitem->execute();
         $rowitem = $stmitem->fetch();
-        $itemdescription = ucwords(strtolower($rowitem['description']));
+        $itemdescription = ucwords(strtolower($rowitem['DESCRIPTION']));
 
         $LOCATION = $row['LOCATION'];
         $QTY_ORDERED = $row['QTY_ORDERED'];
