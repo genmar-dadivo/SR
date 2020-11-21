@@ -8,7 +8,11 @@ if (window.location.href.indexOf("mtd") > -1) {
     var table = $('#tmtd').DataTable( {
       dom: 'frtip',
       "ajax": '../../content/data/mtddata.php',
-      initComplete: function () {
+      initComplete: function (settings, json) {
+        $( "#overlay" ).fadeOut(500, function() {
+          $( "#overlay" ).remove();
+          $(".spinner-grow").addClass('hidden');
+        });
         this.api().columns().every( function () {
           var that = this;
           $( 'input', this.footer() ).on( 'keyup change clear', function () {

@@ -14,6 +14,8 @@
 	<title> MTD | Sales Report </title>
 </head>
 <body>
+	<div id="overlay">
+	</div>
 	<a onclick="backupdb();" class="pointer general-link"> Backup database </a>
 	<div style="height: 100px;"></div>
 	<div class="container">
@@ -30,7 +32,7 @@
 					            	<th>DB No</th>
 					                <th>Order Type</th>
 					                <th>Order No</th>
-					                <th style="width: 10%;">DSM</th>
+					                <th>DSM</th>
 					                <th>Item No</th>
 					                <th>Category</th>
 					                <th>Description</th>
