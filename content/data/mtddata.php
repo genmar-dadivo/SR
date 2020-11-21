@@ -2,8 +2,8 @@
 date_default_timezone_set("Asia/Manila");
 $Ynow = date('Y');
 require "../dbase/dbconfig.php";
-//$sql = "SELECT * FROM oelinhst WHERE REQUEST_DATE > '$Ynow" . "0000' ";
-$sql = "SELECT * FROM oelinhst WHERE ID BETWEEN 100 AND 200 ";
+//$sql = "SELECT * FROM oelinhst WHERE REQUEST_DATE > '$Ynow" . "0900' ";
+$sql = "SELECT * FROM oelinhst";
 $stm = $con->prepare($sql);
 $stm->execute();
 $results = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -21,7 +21,8 @@ if ($stm->rowCount() >= 1) {
         $rowheader = $stmheader->fetch();
         $SALESMAN_NO1 = str_replace(' ', '', $rowheader['SALESMAN_NO1']);
 
-        if ($stmheader->rowCount() == 1) {
+        // get dsm
+        if ($stmheader->rowCount() == 1 AND strpos($ORDER_NO, 'ERROR') !== false) {
             $SALESMAN_NO1 = $rowheader['SALESMAN_NO1'];
             $sqlPSR = "SELECT psr_code, dsm_code FROM psr WHERE psr_code = '$SALESMAN_NO1' LIMIT 1";
             $stmPSR = $con->prepare($sqlPSR);
@@ -43,10 +44,8 @@ if ($stm->rowCount() >= 1) {
             }
             else {}
         }
-        else {}
-
+        else { $dsmname = ''; }
         $SEQUENCE_NO = $row['SEQUENCE_NO'];
-
         // get item details
         $ITEM_NO = $row['ITEM_NO'];
         $sqlitem = "SELECT * FROM product WHERE ITEM_NO = '$ITEM_NO' LIMIT 1";
@@ -54,7 +53,6 @@ if ($stm->rowCount() >= 1) {
         $stmitem->execute();
         $rowitem = $stmitem->fetch();
         $itemdescription = ucwords(strtolower($rowitem['DESCRIPTION']));
-
         $LOCATION = $row['LOCATION'];
         $QTY_ORDERED = $row['QTY_ORDERED'];
         $QTY_TO_SHIP = $row['QTY_TO_SHIP'];
@@ -78,35 +76,37 @@ if ($stm->rowCount() >= 1) {
         $INVOICE_NO = $row['INVOICE_NO'];
 
         $sample = "sample";
-    	$output['data'][] = array(
-            "",
-            "$DATABASE_NO",
-            "$ORDER_TYPE",
-            "<a class='pointer table-link' onclick='getMTDdata(1, $ID)'> $ORDER_NO </a>",
-            "<a class='pointer table-link' onclick='getMTDdata(2, $ID)'> $dsmname </a>",
-            "<a class='pointer table-link' onclick='getMTDdata(3, $ID)'> $ITEM_NO </a>",
-            "$ITEM_PROD_CAT",
-            "$itemdescription",
-            "$CUSTOMER",
-            "$INVOICE_NO",
-            "$QTY_ORDERED",
-            "$QTY_TO_SHIP",
-            "$UNIT_COST",
-            "$UNIT_PRICE",
-            "$REQUEST_DATE",
-            "$QTY_BACK_ORDERED",
-            "$QTY_RETURN_TO_STOCK",
-            "$UNIT_OF_MEASURE",
-            "$TOTAL_QTY_ORDERED",
-            "$TOTAL_QTY_SHIPPED",
-            "$PRICE_ORG",
-            "$LAST_POST_DATE",
-            "$USER_FIELD_1",
-            "$USER_FIELD_2",
-            "$USER_FIELD_3",
-            "$USER_FIELD_4",
-            "$USER_FIELD_5"
-    	);
+        if (!strpos($ORDER_NO, 'ERROR') !== false) {
+        	$output['data'][] = array(
+                "",
+                "$DATABASE_NO",
+                "$ORDER_TYPE",
+                "<a class='pointer table-link' onclick='getMTDdata(1, $ID)'> $ORDER_NO </a>",
+                "<a class='pointer table-link' onclick='getMTDdata(2, $ID)'> $dsmname </a>",
+                "<a class='pointer table-link' onclick='getMTDdata(3, $ID)'> $ITEM_NO </a>",
+                "$ITEM_PROD_CAT",
+                "$itemdescription",
+                "$CUSTOMER",
+                "$INVOICE_NO",
+                "$QTY_ORDERED",
+                "$QTY_TO_SHIP",
+                "$UNIT_COST",
+                "$UNIT_PRICE",
+                "$REQUEST_DATE",
+                "$QTY_BACK_ORDERED",
+                "$QTY_RETURN_TO_STOCK",
+                "$UNIT_OF_MEASURE",
+                "$TOTAL_QTY_ORDERED",
+                "$TOTAL_QTY_SHIPPED",
+                "$PRICE_ORG",
+                "$LAST_POST_DATE",
+                "$USER_FIELD_1",
+                "$USER_FIELD_2",
+                "$USER_FIELD_3",
+                "$USER_FIELD_4",
+                "$USER_FIELD_5"
+        	);
+        }
     }
 }
 else {

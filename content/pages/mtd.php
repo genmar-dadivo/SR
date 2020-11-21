@@ -30,7 +30,7 @@
 					            	<th>DB No</th>
 					                <th>Order Type</th>
 					                <th>Order No</th>
-					                <th>DSM</th>
+					                <th style="width: 10%;">DSM</th>
 					                <th>Item No</th>
 					                <th>Category</th>
 					                <th>Description</th>
