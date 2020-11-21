@@ -20,7 +20,7 @@
 						<div class="col">
 							<select class="form-control" name="database" required>
 								<option disabled selected value=""> Database </option>
-								<option value="1">Noah</option>
+								<option value="1" disabled>Noah</option>
 								<option value="2">Macola</option>
 							</select>
 						</div>
