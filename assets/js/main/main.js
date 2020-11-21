@@ -30,21 +30,20 @@ $('#rawdataprocess').on('submit', function (e) {
   $('#rawdata').prop('readonly', true);
 
   e.preventDefault();
-    $.ajax({
-      type: 'POST',
-      url: 'content/action/processrawdata.php',
-      data: $('#rawdataprocess').serialize(),
-      success: function (data) {
-        var rawdata = data.split(',');
-        console.log(data);
-
-        $('#datashows').html(data);
-        $('#btnSubmit').prop("disabled", false);
-        $("select[name='choice']").prop('disabled', false);
-        $("#btnSubmit").html('Submit');
-        $('#rawdata').prop('readonly', false);
-        $('#rawdataprocess')[0].reset();
-      }
+  $.ajax({
+    type: 'POST',
+    url: 'content/action/processrawdata.php',
+    data: $('#rawdataprocess').serialize(),
+    success: function (data) {
+      var rawdata = data.split(',');
+      console.log(data);
+      $('#datashows').html(data);
+      $('#btnSubmit').prop("disabled", false);
+      $("select[name='choice']").prop('disabled', false);
+      $("#btnSubmit").html('Submit');
+      $('#rawdata').prop('readonly', false);
+      $('#rawdataprocess')[0].reset();
+    }
   });
 });
 
@@ -58,4 +57,11 @@ function getMTDdata(type, id) {
   $('#mdlmtddata').modal('show');
   console.log(id);
   $("#putdata").load( "../../content/data/mtdsingledata.php?type=" + type + "&id=" + id );
+}
+
+function backupdb() {
+  $.ajax({
+    url: '../../content/action/backup.php',
+    success: function (data) { console.log(data); }
+  });
 }
