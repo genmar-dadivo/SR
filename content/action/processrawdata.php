@@ -16,6 +16,11 @@
 		    mkdir($Cbfolder, 0777, true);
 		}
 	}
+	elseif (file_exists($Bfolder)) {
+		if (!file_exists($Cbfolder)) {
+		    mkdir($Cbfolder, 0777, true);
+		}
+	}
 	try {
 		$Bckp = Shuttle_Dumper::create(array(
 			'host' => 'localhost',
