@@ -2,7 +2,7 @@
 date_default_timezone_set("Asia/Manila");
 $Ynow = date('Y');
 require "../dbase/dbconfig.php";
-$sql = "SELECT * FROM oelinhst WHERE REQUEST_DATE > '$Ynow" . "0900' ";
+$sql = "SELECT * FROM oelinhst WHERE REQUEST_DATE > '$Ynow" . "1000' ";
 //$sql = "SELECT * FROM oelinhst";
 $stm = $con->prepare($sql);
 $stm->execute();
