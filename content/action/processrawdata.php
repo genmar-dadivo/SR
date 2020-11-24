@@ -7,33 +7,6 @@
 	include ('dumper.php');
 
 	$database = $_POST['database'];
-
-	$Bfolder = '../dbase/' . $Ynow . '/';
-	$Cbfolder = '../dbase/' . $Ynow . '/' . $MDnow;
-	if (!file_exists($Bfolder)) {
-	    mkdir($Bfolder, 0777, true);
-
-	    if (!file_exists($Cbfolder)) {
-		    mkdir($Cbfolder, 0777, true);
-		}
-	}
-	elseif (file_exists($Bfolder)) {
-		if (!file_exists($Cbfolder)) {
-		    mkdir($Cbfolder, 0777, true);
-		}
-	}
-	try {
-		$Bckp = Shuttle_Dumper::create(array(
-			'host' => 'localhost',
-			'username' => 'root',
-			'password' => '',
-			'db_name' => 'zesto',
-		));
-		$Bckp->dump($Cbfolder . '/zesto.sql');
-	}
-	catch(Shuttle_Exception $e) { echo "Couldn't dump database: " . $e->getMessage(); }
-
-
 	if ($database == 1) {
 		$rawdata = str_replace(' ', '', $_POST['rawdata']);
 		$rawdata = str_replace("'", '', $rawdata);
