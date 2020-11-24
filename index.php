@@ -11,24 +11,24 @@
 	<title> Sales Report </title>
 </head>
 <body>
-	<div class="row">
-		<div class="container">
-			<div style="height: 100px;"></div>
-			<div>
+	<div class="container">
+		<div class="row">
+			<div class="col mx-auto">
+				<div style="height: 100px;"></div>
 				<form method="POST" id="rawdataprocess">
 					<div class="row">
 						<div class="col">
 							<select class="form-control" name="database" required>
-								<option disabled selected value=""> Database </option>
+								<option disabled value=""> Database </option>
 								<option value="1" disabled>Noah</option>
-								<option value="2">Macola</option>
+								<option value="2" selected>Macola</option>
 							</select>
 						</div>
 						<div class="col">
 							<select class="form-control" name="choice" required>
-								<option disabled selected value=""> Data Type </option>
+								<option disabled value=""> Data Type </option>
 								<option value="1">Header</option>
-								<option value="2">Items</option>
+								<option value="2" selected>Items</option>
 							</select>
 						</div>
 					</div>
