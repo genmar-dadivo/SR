@@ -33,6 +33,12 @@ if (window.location.href.indexOf("mtd") > -1) {
           init: function(api, node, config) { $(node).removeClass('dt-button') }
         },
         {
+          extend: "copy",
+          className: "btn btn-sm btn-primary",
+          text: 'Copy',
+          init: function(api, node, config) { $(node).removeClass('dt-button') }
+        },
+        {
           extend: "print",
           className: "btn btn-sm btn-primary",
           text: 'Print',
@@ -76,6 +82,10 @@ $('#rawdataprocess').on('submit', function (e) {
       $('#rawdataprocess')[0].reset();
     }
   });
+});
+
+$("select[name ='choice']").on( "change", function() {
+  console.clear();
 });
 
 $("select[name ='database']").on( "change", function() {
