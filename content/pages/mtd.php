@@ -28,32 +28,17 @@
 					        <thead>
 					            <tr>
 					            	<th></th>
-					            	<th>DB No</th>
-					                <th>Order Type</th>
-					                <th>Order No</th>
-					                <th>DSM</th>
-					                <th>Item No</th>
-					                <th>Category</th>
-					                <th>Description</th>
-					                <th>Customer</th>
-					                <th>Invoice No</th>
-					                <th>QO</th>
-					                <th>QTS</th>
-					                <th>UC</th>
-					                <th>UP</th>
-					                <th>Request Date</th>
-					                <th>QBO</th>
-					                <th>QRTS</th>
-					                <th>UOM</th>
-					                <th>TQO</th>
-					                <th>TQS</th>
-					                <th>Price Org</th>
-					                <th>Last PO Date</th>
-					                <th>UF1</th>
-					                <th>UF2</th>
-					                <th>UF3</th>
-					                <th>UF4</th>
-					                <th>UF5</th>
+					            	<th>Order No</th>
+					            	<th>DSM</th>
+					            	<th>Inv No</th>
+					            	<th>Item No</th>
+					            	<th>QO</th>
+					            	<th>QTS</th>
+					            	<th>UP</th>
+					            	<th>UC</th>
+					            	<th>UP</th>
+					            	<th>PO</th>
+					            	<th>Customer</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -61,32 +46,17 @@
 					        <tfoot>
 					            <tr>
 					            	<th></th>
-					                <th>DB No</th>
-					                <th>Order Type</th>
-					                <th>Order No</th>
-					                <th>DSM</th>
-					                <th>Item No</th>
-					                <th>Category</th>
-					                <th>Description</th>
-					                <th>Customer</th>
-					                <th>Invoice No</th>
-					                <th>QO</th>
-					                <th>QTS</th>
-					                <th>UC</th>
-					                <th>UP</th>
-					                <th>Request Date</th>
-					                <th>QBO</th>
-					                <th>QRTS</th>
-					                <th>UOM</th>
-					                <th>TQO</th>
-					                <th>TQS</th>
-					                <th>Price Org</th>
-					                <th>Last PO Date</th>
-					                <th>UF1</th>
-					                <th>UF2</th>
-					                <th>UF3</th>
-					                <th>UF4</th>
-					                <th>UF5</th>
+					            	<th>Order No</th>
+					            	<th>DSM</th>
+					            	<th>Inv No</th>
+					            	<th>Item No</th>
+					            	<th>QO</th>
+					            	<th>QTS</th>
+					            	<th>UP</th>
+					            	<th>UC</th>
+					            	<th>UP</th>
+					            	<th>PO</th>
+					            	<th>Customer</th>
 					            </tr>
 					        </tfoot>
 					    </table>

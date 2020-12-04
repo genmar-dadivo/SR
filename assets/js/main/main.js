@@ -79,7 +79,8 @@ $('#rawdataprocess').on('submit', function (e) {
       $("select[name='choice']").prop('disabled', false);
       $("#btnSubmit").html('Submit');
       $('#rawdata').prop('readonly', false);
-      $('#rawdataprocess')[0].reset();
+      //$('#rawdataprocess')[0].reset();
+      $('#rawdata').val('');
     }
   });
 });
