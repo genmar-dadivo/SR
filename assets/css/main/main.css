@@ -74,3 +74,8 @@ a:hover, a:visited, a:link, a:active { text-decoration: none; }
   background-color: rgba(196,196,196, 0.5);
   z-index: 5;
 }
+
+.hidden-text {
+  font-size: 0.1px;
+  color: transparent;
+}

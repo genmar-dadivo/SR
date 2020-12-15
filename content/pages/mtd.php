@@ -31,14 +31,15 @@
 					            	<th>Order No</th>
 					            	<th>DSM</th>
 					            	<th>Inv No</th>
-					            	<th>Item No</th>
+					            	<th>Item</th>
+					            	<th>Category</th>
 					            	<th>QO</th>
 					            	<th>QTS</th>
-					            	<th>UP</th>
 					            	<th>UC</th>
 					            	<th>UP</th>
 					            	<th>PO</th>
 					            	<th>Customer</th>
+					            	<th>Invoice Date</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -49,14 +50,15 @@
 					            	<th>Order No</th>
 					            	<th>DSM</th>
 					            	<th>Inv No</th>
-					            	<th>Item No</th>
+					            	<th>Item</th>
+					            	<th>Category</th>
 					            	<th>QO</th>
 					            	<th>QTS</th>
-					            	<th>UP</th>
 					            	<th>UC</th>
 					            	<th>UP</th>
 					            	<th>PO</th>
 					            	<th>Customer</th>
+					            	<th>Invoice Date</th>
 					            </tr>
 					        </tfoot>
 					    </table>

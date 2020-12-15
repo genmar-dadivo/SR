@@ -60,7 +60,7 @@
 				$DATE_SHIPPED = $data[30];
 
 				// header checker
-				$sqlchecker = "SELECT ID, OE_NO, SALESMAN_NO1 FROM oehdrhst WHERE OE_NO = '$OE_NO' AND SALESMAN_NO1 = '$SALESMAN_NO1' AND ID > 98000";
+				$sqlchecker = "SELECT ID, OE_NO, SALESMAN_NO1 FROM oehdrhst WHERE OE_NO = '$OE_NO' AND SALESMAN_NO1 = '$SALESMAN_NO1'";
 				$stmchecker = $con->prepare($sqlchecker);
 				$stmchecker->execute();
 				// if new data
@@ -124,7 +124,7 @@
 				$CUSTOMER = $data[24];
 				$INVOICE_NO = $data[25];
 				// header checker
-				$sqlchecker = "SELECT ID, ORDER_NO, ITEM_NO FROM oelinhst WHERE ORDER_NO = '$ORDER_NO' AND ITEM_NO = '$ITEM_NO' AND ID > 569000";
+				$sqlchecker = "SELECT ID, ORDER_NO, ITEM_NO FROM oelinhst WHERE ORDER_NO = '$ORDER_NO' AND ITEM_NO = '$ITEM_NO' AND LAST_POST_DATE > 20201100";
 				$stmchecker = $con->prepare($sqlchecker);
 				$stmchecker->execute();
 				// if new data
