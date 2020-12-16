@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="assets/css/bs/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/main/main.css">
 
+    <link rel="icon" href="assets/img/logo/logo.png" type="image/gif" sizes="30x30">
+
 	<title> Sales Report </title>
 </head>
 <body>
@@ -18,27 +20,8 @@
 				<form method="POST" id="rawdataprocess">
 					<div class="row">
 						<div class="col">
-							<select class="form-control" name="database" required>
-								<option disabled value=""> Database </option>
-								<option value="1" disabled>Noah</option>
-								<option value="2" selected>Macola</option>
-							</select>
-						</div>
-						<div class="col">
-							<select class="form-control" name="choice" required>
-								<option disabled value=""> Data Type </option>
-								<option value="1">Header</option>
-								<option value="2" selected>Items</option>
-							</select>
-						</div>
-					</div>
-
-					<br>
-
-					<div class="row">
-						<div class="col">
 							<textarea name="rawdata" id="rawdata" class="form-control scroll-wrapper" rows="10" autocomplete="off" required style="resize: none;"></textarea> <br>
-							<button type="submit" class="btn btn-primary btn-lg btn-block" id="btnSubmit"> Submit </button>
+							<button type="submit" class="btn btn-primary" id="btnSubmit"> Submit </button>
 						</div>
 					</div>
 				</form>
@@ -48,6 +31,7 @@
 
 	<script src="assets/js/jquery/jquery-3.3.1.min.js"></script>
     <script src="assets/js/popper/popper.min.js"></script>
+    <script src="assets/js/bs-notify/bootstrap-notify.min.js"></script>
     <script src="assets/js/bs/bootstrap.min.js"></script>
     <script src="assets/js/main/main.js?1"></script>
 

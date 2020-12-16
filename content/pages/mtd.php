@@ -24,13 +24,12 @@
 					<nav class="navbar navbar-light bg-light">
 					</nav>
 				  	<div class="card-body">
-				  		<table id="tmtd" class="table table-striped responsive nowrap">
+				  		<table id="tmtd" class="table table-striped responsive nowrap" width="100%">
 					        <thead>
 					            <tr>
 					            	<th></th>
 					            	<th>Order No</th>
 					            	<th>DSM</th>
-					            	<th>Inv No</th>
 					            	<th>Item</th>
 					            	<th>Category</th>
 					            	<th>QO</th>
@@ -49,7 +48,6 @@
 					            	<th></th>
 					            	<th>Order No</th>
 					            	<th>DSM</th>
-					            	<th>Inv No</th>
 					            	<th>Item</th>
 					            	<th>Category</th>
 					            	<th>QO</th>

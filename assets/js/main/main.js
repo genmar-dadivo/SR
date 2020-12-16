@@ -74,13 +74,21 @@ $('#rawdataprocess').on('submit', function (e) {
     success: function (data) {
       var rawdata = data.split(',');
       console.log(data);
-      $('#datashows').html(data);
+      //$('#datashows').html(data);
       $('#btnSubmit').prop("disabled", false);
       $("select[name='choice']").prop('disabled', false);
       $("#btnSubmit").html('Submit');
       $('#rawdata').prop('readonly', false);
       //$('#rawdataprocess')[0].reset();
       $('#rawdata').val('');
+
+      $.notify({
+        message: data 
+      },
+      {
+        type: 'info',
+        allow_dismiss: false,
+      });
     }
   });
 });

@@ -4,100 +4,23 @@
     $MDnow = date('md');
     $time = time();
 	require '../dbase/dbconfig.php';
-	include ('dumper.php');
+	
+	if (isset($_POST['rawdata'])) {
+		// cleaners
+		$rawdata = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $_POST['rawdata']);
+		$rawdata = str_replace(["UPDATE OR INSERT INTO","VALUES", "MATCHING (DATABASE_NO,ORDER_NO,SEQUENCE_NO);", "(", ")", "'"], "",$rawdata);
+		$rawdata = strtolower($rawdata);
 
-	$database = $_POST['database'];
-	if ($database == 1) {}
-	elseif ($database == 2) {
-		$choice = $_POST['choice'];
-		if ($choice == 1) {
-			$sqlStart = "INSERT INTO oehdrhst(DATABASE_NO, OEHH_TYPE, OE_NO, STATUS, DATE_ENTERED, OEHH_DATE, APPLY_TO_NO, CUSTOMER_NO, SHIPPING_DATE, SHIP_VIA_CODE, TERMS_CODE, SALESMAN_NO1, TAX_CODE_1, MFGING_LOCATION, TOTAL_SALE_AMOUNT, TOTAL_TAXABLE_AMOUNT, DATE_PICKED, DATE_BILLED, INVOICE_NO, INVOICE_DATE, POSTED_DATE, ORIG_ORDER_TYPE, ORIG_ORDER_DATE, ORIG_ORDER_NO, OE_CASH_KEY, USER_FIELD_1, USER_FIELD_2, USER_FIELD_3, USER_FIELD_4, USER_FIELD_5, DATE_SHIPPED) VALUES ";
+		// line mecha
+		if (strpos($rawdata, 'oelinhst') !== false AND strpos($rawdata, 'oehdrhst') === false) {
 
-			echo $sqlStart;
-
-			// raw data cleaner
-			$rawdata = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $_POST['rawdata']);
-			$rawdata = str_replace("'", '', $rawdata);
-
-			// indicate row numbers
-			$rowdata = explode('~', $rawdata);
-			// row dividers
-			$itemdivider = substr_count($rawdata, "~");
-			$runner = 0;
-			while ($runner < $itemdivider) {
-				// get by column data
-				$data = explode(',', $rowdata[$runner]);
-				$DATABASE_NO = $data[0];
-				$OEHH_TYPE = $data[1];
-				$OE_NO = $data[2];
-				$STATUS = $data[3];
-				$DATE_ENTERED = $data[4];
-				$OEHH_DATE = $data[5];
-				$APPLY_TO_NO = $data[6];
-				$CUSTOMER_NO = $data[7];
-				$SHIPPING_DATE = $data[8];
-				$SHIP_VIA_CODE = $data[9];
-				$TERMS_CODE = $data[10];
-				$SALESMAN_NO1 = $data[11];
-				$TAX_CODE_1 = $data[12];
-				$MFGING_LOCATION = $data[13];
-				$TOTAL_SALE_AMOUNT = $data[14];
-				$TOTAL_TAXABLE_AMOUNT = $data[15];
-				$DATE_PICKED = $data[16];
-				$DATE_BILLED = $data[17];
-				$INVOICE_NO = $data[18];
-				$INVOICE_DATE = $data[19];
-				$POSTED_DATE = $data[20];
-				$ORIG_ORDER_TYPE = $data[21];
-				$ORIG_ORDER_DATE = $data[22];
-				$ORIG_ORDER_NO = $data[23];
-				$OE_CASH_KEY = $data[24];
-				$USER_FIELD_1 = $data[25];
-				$USER_FIELD_2 = $data[26];
-				$USER_FIELD_3 = $data[27];
-				$USER_FIELD_4 = $data[28];
-				$USER_FIELD_5 = $data[29];
-				$DATE_SHIPPED = $data[30];
-
-				// header checker
-				$sqlchecker = "SELECT ID, OE_NO, SALESMAN_NO1 FROM oehdrhst WHERE OE_NO = '$OE_NO' AND SALESMAN_NO1 = '$SALESMAN_NO1'";
-				$stmchecker = $con->prepare($sqlchecker);
-				$stmchecker->execute();
-				// if new data
-				if ($stmchecker->rowCount() == 0) {
-					$sql = "('$DATABASE_NO', '$OEHH_TYPE', '$OE_NO', '$STATUS', '$DATE_ENTERED', '$OEHH_DATE', '$APPLY_TO_NO', '$CUSTOMER_NO', '$SHIPPING_DATE', '$SHIP_VIA_CODE', '$TERMS_CODE', '$SALESMAN_NO1', '$TAX_CODE_1', '$MFGING_LOCATION', '$TOTAL_SALE_AMOUNT', '$TOTAL_TAXABLE_AMOUNT', '$DATE_PICKED', '$DATE_BILLED', '$INVOICE_NO', '$INVOICE_DATE', '$POSTED_DATE', '$ORIG_ORDER_TYPE', '$ORIG_ORDER_DATE', '$ORIG_ORDER_NO', '$OE_CASH_KEY', '$USER_FIELD_1', '$USER_FIELD_2', '$USER_FIELD_3', '$USER_FIELD_4', '$USER_FIELD_5', '$DATE_SHIPPED'),";
-					// $stm = $con->prepare($sql);
-					// $stm->execute();
-					echo $sql;
-				}
-				// if duplicate
-				else {
-					$OE_NO = $OE_NO . "DUPLICATE" . time();
-					$sql = "('$DATABASE_NO', '$OEHH_TYPE', '$OE_NO', '$STATUS', '$DATE_ENTERED', '$OEHH_DATE', '$APPLY_TO_NO', '$CUSTOMER_NO', '$SHIPPING_DATE', '$SHIP_VIA_CODE', '$TERMS_CODE', '$SALESMAN_NO1', '$TAX_CODE_1', '$MFGING_LOCATION', '$TOTAL_SALE_AMOUNT', '$TOTAL_TAXABLE_AMOUNT', '$DATE_PICKED', '$DATE_BILLED', '$INVOICE_NO', '$INVOICE_DATE', '$POSTED_DATE', '$ORIG_ORDER_TYPE', '$ORIG_ORDER_DATE', '$ORIG_ORDER_NO', '$OE_CASH_KEY', '$USER_FIELD_1', '$USER_FIELD_2', '$USER_FIELD_3', '$USER_FIELD_4', '$USER_FIELD_5', '$DATE_SHIPPED'),";
-					// $stm = $con->prepare($sql);
-					// $stm->execute();
-					echo $sql;
-				}
-				$runner ++;
-			}
-			echo ";";
-			//echo $runner . "(s) Header Data inserted";
-		}
-		elseif ($choice == 2) {
-			$sqlStart = "INSERT INTO oelinhst(DATABASE_NO, ORDER_TYPE, ORDER_NO, SEQUENCE_NO, ITEM_NO, LOCATION, QTY_ORDERED, QTY_TO_SHIP, UNIT_PRICE, REQUEST_DATE, QTY_BACK_ORDERED, QTY_RETURN_TO_STOCK, UNIT_OF_MEASURE, UNIT_COST, TOTAL_QTY_ORDERED, TOTAL_QTY_SHIPPED, PRICE_ORG, LAST_POST_DATE, ITEM_PROD_CAT, USER_FIELD_1, USER_FIELD_2, USER_FIELD_3, USER_FIELD_4, USER_FIELD_5, CUSTOMER, INVOICE_NO) VALUES ";
-			echo $sqlStart;
-			// raw data cleaner
-			$rawdata = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $_POST['rawdata']);
-			$rawdata = str_replace("'", '', $rawdata);
-
-			// indicate row numbers
-			$rowdata = explode('~', $rawdata);
-			// row dividers
-			$itemdivider = substr_count($rawdata, "~");
-			$runner = 0;
-			while ($runner < $itemdivider) {
-				$data = explode(',', $rowdata[$runner]);
-				$DATABASE_NO = $data[0];
+		    $rowdata = explode('oelinhst', $rawdata);
+		    $autodivide = substr_count($rawdata, "oelinhst");
+		    $runner = 0;
+		    while ($runner < $autodivide) {
+		    	$datarunner = $runner + 1;
+		    	$data = explode(',', $rowdata[$datarunner]);
+		    	$DATABASE_NO = $data[0];
 				$ORDER_TYPE = $data[1];
 				$ORDER_NO = $data[2];
 				$SEQUENCE_NO = $data[3];
@@ -123,31 +46,30 @@
 				$USER_FIELD_5 = $data[23];
 				$CUSTOMER = $data[24];
 				$INVOICE_NO = $data[25];
-				// header checker
-				$sqlchecker = "SELECT ID, ORDER_NO, ITEM_NO FROM oelinhst WHERE ORDER_NO = '$ORDER_NO' AND ITEM_NO = '$ITEM_NO' AND LAST_POST_DATE > 20201100";
+
+				// checker
+				$sqlchecker = "SELECT ID, ORDER_NO, ITEM_NO FROM oelinhst WHERE DATABASE_NO = '$DATABASE_NO' AND ORDER_NO = '$ORDER_NO' AND ITEM_NO = '$ITEM_NO'" ;
 				$stmchecker = $con->prepare($sqlchecker);
 				$stmchecker->execute();
-				// if new data
 				if ($stmchecker->rowCount() == 0) {
-					$sql = "('$DATABASE_NO', '$ORDER_TYPE', '$ORDER_NO', '$SEQUENCE_NO', '$ITEM_NO', '$LOCATION', '$QTY_ORDERED', '$QTY_TO_SHIP', '$UNIT_PRICE', '$REQUEST_DATE', '$QTY_BACK_ORDERED', '$QTY_RETURN_TO_STOCK', '$UNIT_OF_MEASURE', '$UNIT_COST', '$TOTAL_QTY_ORDERED', '$TOTAL_QTY_SHIPPED', '$PRICE_ORG', '$LAST_POST_DATE', '$ITEM_PROD_CAT', '$USER_FIELD_1', '$USER_FIELD_2', '$USER_FIELD_3', '$USER_FIELD_4', '$USER_FIELD_5', '$CUSTOMER', '$INVOICE_NO'),";
-					// $stm = $con->prepare($sql);
-					// $stm->execute();
-					echo $sql;
+					$sqlinsert = "INSERT INTO oelinhst (DATABASE_NO, ORDER_TYPE, ORDER_NO, SEQUENCE_NO, ITEM_NO, LOCATION, QTY_ORDERED, QTY_TO_SHIP, UNIT_PRICE, REQUEST_DATE, QTY_BACK_ORDERED, QTY_RETURN_TO_STOCK, UNIT_OF_MEASURE, UNIT_COST, TOTAL_QTY_ORDERED, TOTAL_QTY_SHIPPED, PRICE_ORG, LAST_POST_DATE, ITEM_PROD_CAT, USER_FIELD_1, USER_FIELD_2, USER_FIELD_3, USER_FIELD_4, USER_FIELD_5, CUSTOMER, INVOICE_NO) VALUES ('$DATABASE_NO', '$ORDER_TYPE', '$ORDER_NO', '$SEQUENCE_NO', '$ITEM_NO', '$LOCATION', '$QTY_ORDERED', '$QTY_TO_SHIP', '$UNIT_PRICE', '$REQUEST_DATE', '$QTY_BACK_ORDERED', '$QTY_RETURN_TO_STOCK', '$UNIT_OF_MEASURE', '$UNIT_COST', '$TOTAL_QTY_ORDERED', '$TOTAL_QTY_SHIPPED', '$PRICE_ORG', '$LAST_POST_DATE', '$ITEM_PROD_CAT', '$USER_FIELD_1', '$USER_FIELD_2', '$USER_FIELD_3', '$USER_FIELD_4', '$USER_FIELD_5', '$CUSTOMER', '$INVOICE_NO')";
+					$stminsert = $con->prepare($sqlinsert);
+					$stminsert->execute();
+					//$last_id = $con->lastInsertId();
 				}
 				else {
-					$ORDER_NO = $ORDER_NO . "DUPLICATE" . time();
-					$sql = "('$DATABASE_NO', '$ORDER_TYPE', '$ORDER_NO', '$SEQUENCE_NO', '$ITEM_NO', '$LOCATION', '$QTY_ORDERED', '$QTY_TO_SHIP', '$UNIT_PRICE', '$REQUEST_DATE', '$QTY_BACK_ORDERED', '$QTY_RETURN_TO_STOCK', '$UNIT_OF_MEASURE', '$UNIT_COST', '$TOTAL_QTY_ORDERED', '$TOTAL_QTY_SHIPPED', '$PRICE_ORG', '$LAST_POST_DATE', '$ITEM_PROD_CAT', '$USER_FIELD_1', '$USER_FIELD_2', '$USER_FIELD_3', '$USER_FIELD_4', '$USER_FIELD_5', '$CUSTOMER', '$INVOICE_NO'),";
-					// $stm = $con->prepare($sql);
-					// $stm->execute();
-					echo $sql;
+					$DATABASE_NO = "DUPLICATE" . $DATABASE_NO;
+					$sqlinsert = "INSERT INTO oelinhst (DATABASE_NO, ORDER_TYPE, ORDER_NO, SEQUENCE_NO, ITEM_NO, LOCATION, QTY_ORDERED, QTY_TO_SHIP, UNIT_PRICE, REQUEST_DATE, QTY_BACK_ORDERED, QTY_RETURN_TO_STOCK, UNIT_OF_MEASURE, UNIT_COST, TOTAL_QTY_ORDERED, TOTAL_QTY_SHIPPED, PRICE_ORG, LAST_POST_DATE, ITEM_PROD_CAT, USER_FIELD_1, USER_FIELD_2, USER_FIELD_3, USER_FIELD_4, USER_FIELD_5, CUSTOMER, INVOICE_NO) VALUES ('$DATABASE_NO', '$ORDER_TYPE', '$ORDER_NO', '$SEQUENCE_NO', '$ITEM_NO', '$LOCATION', '$QTY_ORDERED', '$QTY_TO_SHIP', '$UNIT_PRICE', '$REQUEST_DATE', '$QTY_BACK_ORDERED', '$QTY_RETURN_TO_STOCK', '$UNIT_OF_MEASURE', '$UNIT_COST', '$TOTAL_QTY_ORDERED', '$TOTAL_QTY_SHIPPED', '$PRICE_ORG', '$LAST_POST_DATE', '$ITEM_PROD_CAT', '$USER_FIELD_1', '$USER_FIELD_2', '$USER_FIELD_3', '$USER_FIELD_4', '$USER_FIELD_5', '$CUSTOMER', '$INVOICE_NO')";
 				}
-				$runner ++;
+				$runner++;
 			}
-			echo ";";
-			//echo $runner . "(s) Item Data inserted";
+			echo "$runner(s) records inserted";
 		}
+		elseif (strpos($rawdata, 'oelinhst') === false AND strpos($rawdata, 'oehdrhst') !== false) {
+			echo "oehdrhst";
+		}
+		else { echo "Error"; }
 	}
-	else { echo "Error Occured"; }
 
 
 ?>
