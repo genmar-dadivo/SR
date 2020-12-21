@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="../../assets/css/dt/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../assets/css/dt/responsive.dataTables.min.css">
 
+    <link rel="icon" href="../../assets/img/logo/logo.png" type="image/gif" sizes="30x30">
+
 	<title> MTD | Sales Report </title>
 </head>
 <body>
