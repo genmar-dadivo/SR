@@ -41,6 +41,9 @@
 					            	<th>PO</th>
 					            	<th>Customer</th>
 					            	<th>Invoice Date</th>
+					            	<th>Area</th>
+					            	<th>Gross</th>
+					            	<th>Net</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -59,6 +62,9 @@
 					            	<th>PO</th>
 					            	<th>Customer</th>
 					            	<th>Invoice Date</th>
+					            	<th>Area</th>
+					            	<th>Gross</th>
+					            	<th>Net</th>
 					            </tr>
 					        </tfoot>
 					    </table>
