@@ -4,16 +4,21 @@
     $MDnow = date('md');
     $time = time();
 	require '../dbase/dbconfig.php';
+	
 	if (isset($_POST['rawdata'])) {
 		// cleaners
 		$rawdata = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $_POST['rawdata']);
-		$rawdata = str_replace(["UPDATE","OR ","INSERT","INTO","VALUES", "MATCHING","DATABASE_NO,ORDER_NO,SEQUENCE_NO","DATABASE_NO, OE_NO, CUSTOMER_NO","(", ")", ";"], "",$rawdata);
+		$rawdata = str_replace(["'","UPDATE","OR ","INSERT","INTO","VALUES", "MATCHING","DATABASE_NO,ORDER_NO,SEQUENCE_NO","DATABASE_NO, OE_NO, CUSTOMER_NO","(", ")", ";"], "",$rawdata);
+		// additional settings
+		$start = 20200100;
+		$end = 20200199;
 		$rawdata = strtolower($rawdata);
 		// line mecha
 		if (strpos($rawdata, 'oelinhst') !== false AND strpos($rawdata, 'oehdrhst') === false) {
 		    $rowdata = explode('oelinhst', $rawdata);
 		    $autodivide = substr_count($rawdata, "oelinhst");
 		    $runner = 0;
+		    $values = '';
 		 	while ($runner < $autodivide) {
 		    	$datarunner = $runner + 1;
 		    	$data = explode(',', $rowdata[$datarunner]);
@@ -43,17 +48,28 @@
 				$USER_FIELD_5 = $data[23];
 				$CUSTOMER = $data[24];
 				$INVOICE_NO = $data[25];
-				$INVOICE_DATE = $data[26];
-				// checker
-				$sqlchecker = "SELECT ID, ORDER_NO, ITEM_NO FROM oelinhst WHERE DATABASE_NO = '$DATABASE_NO' AND ORDER_NO = '$ORDER_NO' AND ITEM_NO = '$ITEM_NO' AND UNIT_PRICE = '$UNIT_PRICE' " ;
-				$stmchecker = $con->prepare($sqlchecker);
-				$stmchecker->execute();
-				if ($stmchecker->rowCount() > 0) { $DATABASE_NO = "D" . $DATABASE_NO; }
-				$sqlinsert = "INSERT INTO oelinhst (DATABASE_NO, ORDER_TYPE, ORDER_NO, SEQUENCE_NO, ITEM_NO, LOCATION, QTY_ORDERED, QTY_TO_SHIP, UNIT_PRICE, REQUEST_DATE, QTY_BACK_ORDERED, QTY_RETURN_TO_STOCK, UNIT_OF_MEASURE, UNIT_COST, TOTAL_QTY_ORDERED, TOTAL_QTY_SHIPPED, PRICE_ORG, LAST_POST_DATE, ITEM_PROD_CAT, USER_FIELD_1, USER_FIELD_2, USER_FIELD_3, USER_FIELD_4, USER_FIELD_5, CUSTOMER, INVOICE_NO, INVOICE_DATE) VALUES ('$DATABASE_NO', '$ORDER_TYPE', '$ORDER_NO', '$SEQUENCE_NO', '$ITEM_NO', '$LOCATION', '$QTY_ORDERED', '$QTY_TO_SHIP', '$UNIT_PRICE', '$REQUEST_DATE', '$QTY_BACK_ORDERED', '$QTY_RETURN_TO_STOCK', '$UNIT_OF_MEASURE', '$UNIT_COST', '$TOTAL_QTY_ORDERED', '$TOTAL_QTY_SHIPPED', '$PRICE_ORG', '$LAST_POST_DATE', '$ITEM_PROD_CAT', '$USER_FIELD_1', '$USER_FIELD_2', '$USER_FIELD_3', '$USER_FIELD_4', '$USER_FIELD_5', '$CUSTOMER', '$INVOICE_NO', '$INVOICE_DATE')";
-				$stminsert = $con->prepare($sqlinsert);
-				$stminsert->execute();
-				$runner++;
+
+				//if (strpos($INVOICE_NO, $ORDER_NO) !== false) {
+					if (isset($data[26])) { $INVOICE_DATE = $data[26]; }
+					else { $INVOICE_DATE = ''; }
+					// checker
+					$sqlchecker = "SELECT ID, ORDER_NO, ITEM_NO FROM oelinhst WHERE DATABASE_NO = $DATABASE_NO AND ORDER_NO = '$ORDER_NO' AND ITEM_NO = '$ITEM_NO' AND UNIT_PRICE = '$UNIT_PRICE' AND INVOICE_DATE BETWEEN $start AND $end";
+					$stmchecker = $con->prepare($sqlchecker);
+					$stmchecker->execute();
+					if ($stmchecker->rowCount() > 0) { $DATABASE_NO = "D" . $DATABASE_NO; }
+					$values .= "('$DATABASE_NO', '$ORDER_TYPE', '$ORDER_NO', '$SEQUENCE_NO', '$ITEM_NO', '$LOCATION', '$QTY_ORDERED', '$QTY_TO_SHIP', '$UNIT_PRICE', '$REQUEST_DATE', '$QTY_BACK_ORDERED', '$QTY_RETURN_TO_STOCK', '$UNIT_OF_MEASURE', '$UNIT_COST', '$TOTAL_QTY_ORDERED', '$TOTAL_QTY_SHIPPED', '$PRICE_ORG', '$LAST_POST_DATE', '$ITEM_PROD_CAT', '$USER_FIELD_1', '$USER_FIELD_2', '$USER_FIELD_3', '$USER_FIELD_4', '$USER_FIELD_5', '$CUSTOMER', '$INVOICE_NO', '$INVOICE_DATE'),";
+					$runner++;
+				// }
+				// else {
+				// 	break;
+				// 	echo "Error IN";
+				// }
 			}
+			$values = rtrim($values, ", ");
+			$sqlinsert = "INSERT INTO oelinhst (DATABASE_NO, ORDER_TYPE, ORDER_NO, SEQUENCE_NO, ITEM_NO, LOCATION, QTY_ORDERED, QTY_TO_SHIP, UNIT_PRICE, REQUEST_DATE, QTY_BACK_ORDERED, QTY_RETURN_TO_STOCK, UNIT_OF_MEASURE, UNIT_COST, TOTAL_QTY_ORDERED, TOTAL_QTY_SHIPPED, PRICE_ORG, LAST_POST_DATE, ITEM_PROD_CAT, USER_FIELD_1, USER_FIELD_2, USER_FIELD_3, USER_FIELD_4, USER_FIELD_5, CUSTOMER, INVOICE_NO, INVOICE_DATE) VALUES " . $values;
+			//echo $sqlinsert;
+			$stminsert = $con->prepare($sqlinsert);
+			$stminsert->execute();
 			// duplicate checker
 			$sqldupchecker = "SELECT DATABASE_NO FROM `oelinhst` WHERE DATABASE_NO LIKE '%D%' ";
 			$stmdupchecker = $con->prepare($sqldupchecker);
@@ -108,7 +124,7 @@
 				$DATE_SHIPPED = $data[30];
 				$OE_PO_NO = $data[31];
 				// checker
-				$sqlchecker = "SELECT ID, OE_NO, SALESMAN_NO1 FROM oehdrhst WHERE OE_NO = '$OE_NO' AND SALESMAN_NO1 = '$SALESMAN_NO1' AND ORIG_ORDER_TYPE = '$ORIG_ORDER_TYPE' ";
+				$sqlchecker = "SELECT ID, OE_NO, SALESMAN_NO1 FROM oehdrhst WHERE DATABASE_NO = '$DATABASE_NO' AND OE_NO = '$OE_NO' AND SALESMAN_NO1 = '$SALESMAN_NO1' AND ORIG_ORDER_TYPE = '$ORIG_ORDER_TYPE' ";
 				$stmchecker = $con->prepare($sqlchecker);
 				$stmchecker->execute();
 				if ($stmchecker->rowCount() > 0) { $DATABASE_NO = "D" . $DATABASE_NO; }
@@ -164,6 +180,49 @@
 			$stmdupdelete = $con->prepare($sqldupdelete);
 			$stmdupdelete->execute();
 		}
+		// customer mecha
+		elseif (strpos($rawdata, 'oelinhst') === false AND strpos($rawdata, 'oehdrhst') === false AND strpos($rawdata, 'customerz') !== false) {
+			$rowdata = explode('customerz', $rawdata);
+		    $autodivide = substr_count($rawdata, "customerz");
+		    $runner = 0;
+		    $values = '';
+		 	while ($runner < $autodivide) {
+		    	$datarunner = $runner + 1;
+		    	$data = explode(',', $rowdata[$datarunner]);
+		    	$DBNO = $data[0];
+				$CUS_NO = $data[1];
+				$CUSTOMER = $data[2];
+				$ADDRESS = $data[3];
+				$TIN_NO = $data[4];
+				$CONTACT_PERSON = $data[5];
+				$CREDIT_LIMIT = $data[6];
+				// checker
+				$sqlchecker = "SELECT ID, DBNO, CUS_NO FROM v_customer_info WHERE DBNO = $DBNO AND CUS_NO = '$CUS_NO'";
+				$stmchecker = $con->prepare($sqlchecker);
+				$stmchecker->execute();
+				if ($stmchecker->rowCount() > 0) { $DBNO = "D" . $DBNO; }
+				$values .= "('$DBNO', '$CUS_NO', '$CUSTOMER', '$ADDRESS', '$TIN_NO', '$CONTACT_PERSON', '$CREDIT_LIMIT'),";
+				$runner++;
+			}
+			$values = rtrim($values, ", ");
+			$sqlinsert = "INSERT INTO v_customer_info (DBNO, CUS_NO, CUSTOMER, ADDRESS, TIN_NO, CONTACT_PERSON, CREDIT_LIMIT) VALUES " . $values;
+			$stminsert = $con->prepare($sqlinsert);
+			$stminsert->execute();
+			// duplicate checker
+			$sqldupchecker = "SELECT DBNO FROM `v_customer_info` WHERE DBNO LIKE '%D%' ";
+			$stmdupchecker = $con->prepare($sqldupchecker);
+			$stmdupchecker->execute();
+			$duplicounter = $stmdupchecker->rowCount();
+			echo "$duplicounter duplicate entry. \n";
+			echo date('h:i A') . "\n";
+			echo "$runner(s) records inserted";
+			// delete duplicate
+			$sqldupdelete = "DELETE FROM `v_customer_info` WHERE DBNO LIKE '%D%' ";
+			$stmdupdelete = $con->prepare($sqldupdelete);
+			$stmdupdelete->execute();
+		}
 		else { echo "Error"; }
+
+		
 	}
 ?>

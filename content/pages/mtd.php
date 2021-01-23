@@ -30,17 +30,46 @@
 					        <thead>
 					            <tr>
 					            	<th></th>
-					            	<th>Order No</th>
+					            	<th>DBNO</th>
+					            	<th>SALESMAN</th>
 					            	<th>DSM</th>
-					            	<th>Item</th>
-					            	<th>Category</th>
-					            	<th>QO</th>
-					            	<th>QTS</th>
-					            	<th>UC</th>
-					            	<th>UP</th>
-					            	<th>PO</th>
-					            	<th>Customer</th>
-					            	<th>Invoice Date</th>
+					            	<th>BRANCH</th>
+					            	<th>OT</th>
+					            	<th>ORDER NO</th>
+					            	<th>SEQUENCE NO</th>
+					            	<th>ITEM NO</th>
+					            	<th>PROD CAT</th>
+					            	<th>ITEM CAT</th>
+					            	<th>SKU</th>
+					            	<th>LOCATION</th>
+					            	<th>QTY ORDERED</th>
+					            	<th>QTY TOSHIP</th>
+					            	<th>UNIT PRICE</th>
+					            	<th>REQUEST DATE</th>
+					            	<th>QBO</th>
+					            	<th>QRTS</th>
+					            	<th>UOM</th>
+					            	<th>UNIT COST</th>
+					            	<th>TQO</th>
+					            	<th>TQS</th>
+					            	<th>PRICE ORIG</th>
+					            	<th>LPD</th>
+					            	<th>IPC</th>
+					            	<th>UF1</th>
+					            	<th>UF2</th>
+					            	<th>UF3</th>
+					            	<th>UF4</th>
+					            	<th>UF5</th>
+					            	<th>CUSTOMER</th>
+					            	<th>ADDRESS</th>
+					            	<th>CUST TIN</th>
+					            	<th>CUST TYPE</th>
+					            	<th>PROVINCIAL</th>
+					            	<th>REGIONS</th>
+					            	<th>INVOICE NO</th>
+					            	<th>INVOICE DATE</th>
+					            	<th>GROSS</th>
+					            	<th>NET</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -48,17 +77,46 @@
 					        <tfoot>
 					            <tr>
 					            	<th></th>
-					            	<th>Order No</th>
+					            	<th>DBNO</th>
+					            	<th>SALESMAN</th>
 					            	<th>DSM</th>
-					            	<th>Item</th>
-					            	<th>Category</th>
-					            	<th>QO</th>
-					            	<th>QTS</th>
-					            	<th>UC</th>
-					            	<th>UP</th>
-					            	<th>PO</th>
-					            	<th>Customer</th>
-					            	<th>Invoice Date</th>
+					            	<th>BRANCH</th>
+					            	<th>OT</th>
+					            	<th>ORDER NO</th>
+					            	<th>SEQUENCE NO</th>
+					            	<th>ITEM NO</th>
+					            	<th>ITEM CAT</th>
+					            	<th>PROD CAT</th>
+					            	<th>SKU</th>
+					            	<th>LOCATION</th>
+					            	<th>QTY ORDERED</th>
+					            	<th>QTY TOSHIP</th>
+					            	<th>UNIT PRICE</th>
+					            	<th>REQUEST DATE</th>
+					            	<th>QBO</th>
+					            	<th>QRTS</th>
+					            	<th>UOM</th>
+					            	<th>UNIT COST</th>
+					            	<th>TQO</th>
+					            	<th>TQS</th>
+					            	<th>PRICE ORIG</th>
+					            	<th>LPD</th>
+					            	<th>IPC</th>
+					            	<th>UF1</th>
+					            	<th>UF2</th>
+					            	<th>UF3</th>
+					            	<th>UF4</th>
+					            	<th>UF5</th>
+					            	<th>CUSTOMER</th>
+					            	<th>ADDRESS</th>
+					            	<th>CUST TIN</th>
+					            	<th>CUST TYPE</th>
+					            	<th>PROVINCIAL</th>
+					            	<th>REGIONS</th>
+					            	<th>INVOICE NO</th>
+					            	<th>INVOICE DATE</th>
+					            	<th>GROSS</th>
+					            	<th>NET</th>
 					            </tr>
 					        </tfoot>
 					    </table>

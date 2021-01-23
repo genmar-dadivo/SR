@@ -1,5 +1,8 @@
 if (window.location.href.indexOf("mtd") > -1) {
   $(document).ready(function() {
+    var d = new Date();
+    var gettime = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+    console.log('%c Starts @ ' + gettime, 'background: #222; color: #bada55');
     $('#tmtd tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" class="form-control">' );
@@ -10,8 +13,17 @@ if (window.location.href.indexOf("mtd") > -1) {
       "ajax": '../../content/data/mtddata.php',
       initComplete: function (settings, json) {
         $( "#overlay" ).fadeOut(500, function() {
-          $( "#overlay" ).remove();
-          $(".spinner-grow").addClass('hidden');
+        $( "#overlay" ).remove();
+        $(".spinner-grow").addClass('hidden');
+        var nd = new Date();
+        var ngettime = nd.getHours() + ':' + nd.getMinutes() + ':' + nd.getSeconds();
+        console.log('Finish @ ' + ngettime);
+        var diff = Math.abs(d - nd),
+        min = Math.floor((diff/1000/60) << 0),
+        sec = Math.floor((diff/1000) % 60);
+        console.log('Duration ' + min + ':' + sec);
+
+        $('.buttons-excel').click();
         });
         this.api().columns().every( function () {
           var that = this;
@@ -65,6 +77,19 @@ $('#rawdataprocess').on('submit', function (e) {
   $('#btnSubmit').prop("disabled", true);
   $("#btnSubmit").html('Loading ...');
   $('#rawdata').prop('readonly', true);
+  var raw = $('#rawdata').val();
+  var countme = '';
+  var d = new Date();
+  var gettime = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+  console.log('%c Starts @ ' + gettime, 'background: #222; color: #bada55');
+  if (raw.includes('oelinhst')) { countme = 'oelinhst'; }
+  else if (raw.includes('oehdrhst')) { countme = 'oehdrhst'; }
+  else if (raw.includes('product')) { countme = 'product'; }
+  else if (raw.includes('customerz')) { countme = 'customerz'; }
+  var checker = new RegExp(countme, 'g');
+
+  var count = (raw.match(checker));
+  //console.log(count);
 
   e.preventDefault();
   $.ajax({
@@ -81,6 +106,13 @@ $('#rawdataprocess').on('submit', function (e) {
       $('#rawdata').prop('readonly', false);
       //$('#rawdataprocess')[0].reset();
       $('#rawdata').val('');
+      var nd = new Date();
+      var ngettime = nd.getHours() + ':' + nd.getMinutes() + ':' + nd.getSeconds();
+      console.log('Finish @ ' + ngettime);
+      var diff = Math.abs(d - nd),
+      min = Math.floor((diff/1000/60) << 0),
+      sec = Math.floor((diff/1000) % 60);
+      console.log('Duration ' + min + ':' + sec);
 
       $.notify({
         message: data 

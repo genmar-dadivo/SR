@@ -20,7 +20,7 @@
 	}
 	try {
 		$Bckp = Shuttle_Dumper::create(array(
-			'host' => 'localhost',
+			'host' => '192.168.51.16',
 			'username' => 'root',
 			'password' => '',
 			'db_name' => 'zesto',
