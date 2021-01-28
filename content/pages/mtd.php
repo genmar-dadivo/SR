@@ -71,6 +71,18 @@
 					            	<th>INVOICE DATE</th>
 					            	<th>GROSS</th>
 					            	<th>NET</th>
+					            	<th>Item</th>
+					            	<th>Category</th>
+					            	<th>QO</th>
+					            	<th>QTS</th>
+					            	<th>UC</th>
+					            	<th>UP</th>
+					            	<th>PO</th>
+					            	<th>Customer</th>
+					            	<th>Invoice Date</th>
+					            	<th>Area</th>
+					            	<th>Gross</th>
+					            	<th>Net</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -119,6 +131,18 @@
 					            	<th>INVOICE DATE</th>
 					            	<th>GROSS</th>
 					            	<th>NET</th>
+					            	<th>Item</th>
+					            	<th>Category</th>
+					            	<th>QO</th>
+					            	<th>QTS</th>
+					            	<th>UC</th>
+					            	<th>UP</th>
+					            	<th>PO</th>
+					            	<th>Customer</th>
+					            	<th>Invoice Date</th>
+					            	<th>Area</th>
+					            	<th>Gross</th>
+					            	<th>Net</th>
 					            </tr>
 					        </tfoot>
 					    </table>
@@ -127,21 +151,15 @@
 			</div>
 		</div>
 	</div>
-
-
 	<?php
 	require '../parts/modal/mdlmtddata.php';
-
 	?>
-
     <script src="../../assets/js/jquery/jquery-3.3.1.min.js"></script>
     <script src="../../assets/js/popper/popper.min.js"></script>
     <script src="../../assets/js/bs/bootstrap.min.js"></script>
-
     <script src="../../assets/js/dt/jquery.dataTables.min.js"></script>
    	<script src="../../assets/js/dt/dataTables.bootstrap4.min.js"></script>
 	<script src="../../assets/js/dt/dataTables.responsive.min.js"></script>
-
     <script src="../../assets/js/dt/dataTables.buttons.min.js"></script>   
     <script src="../../assets/js/dt/buttons.flash.min.js"></script>    
     <script src="../../assets/js/dt/buttons.html5.min.js"></script>    
@@ -149,10 +167,6 @@
     <script src="../../assets/js/dt/jszip.min.js"></script>    
     <script src="../../assets/js/dt/pdfmake.min.js"></script>    
     <script src="../../assets/js/dt/vfs_fonts.js"></script> 
-
     <script src="../../assets/js/main/main.js?1"></script>
-
-    
-
 </body>
 </html>
