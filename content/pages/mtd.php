@@ -33,6 +33,7 @@
 					            	<th>DBNO</th>
 					            	<th>SALESMAN</th>
 					            	<th>DSM</th>
+					            	<th>DSMSORT</th>
 					            	<th>BRANCH</th>
 					            	<th>OT</th>
 					            	<th>ORDER NO</th>
@@ -80,6 +81,7 @@
 					            	<th>DBNO</th>
 					            	<th>SALESMAN</th>
 					            	<th>DSM</th>
+					            	<th>DSMSORT</th>
 					            	<th>BRANCH</th>
 					            	<th>OT</th>
 					            	<th>ORDER NO</th>

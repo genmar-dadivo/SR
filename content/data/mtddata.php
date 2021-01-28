@@ -2,7 +2,7 @@
     date_default_timezone_set("Asia/Manila");
     $Ynow = date('Y');
     require "../dbase/dbconfig.php";
-    $sql = "SELECT (SELECT C.CUSTOMER FROM v_customer_info C WHERE TRIM(C.DBNO) = TRIM(l.DATABASE_NO) AND C.CUS_NO LIKE CONCAT ('%' , TRIM(l.CUSTOMER) , '%') LIMIT 1) AS CUSTOMERN, (SELECT A.ADDRESS FROM v_customer_info A WHERE A.DBNO = l.DATABASE_NO AND A.CUS_NO LIKE CONCAT ('%' , l.CUSTOMER , '%') LIMIT 1) AS ADDRESSC, (SELECT T.TIN_NO FROM v_customer_info T WHERE T.DBNO = l.DATABASE_NO AND T.CUS_NO LIKE CONCAT ('%' , l.CUSTOMER , '%') LIMIT 1) AS TINC, (SELECT t.CUST_TYPE_CODE FROM v_customer_type t WHERE t.DBNO = l.DATABASE_NO AND t.CUS_NO LIKE CONCAT ('%' , l.CUSTOMER , '%') LIMIT 1) AS TYPEC, (SELECT h.SALESMAN_NO1 FROM oehdrhst h WHERE h.DATABASE_NO = TRIM(l.DATABASE_NO) AND h.OE_NO = l.ORDER_NO) AS SALESMAN, (SELECT p.dsm_code FROM psr p WHERE p.psr_code = SALESMAN) AS DSMCODE, (SELECT d.dsm_desc FROM dsm d WHERE d.dsm_code = DSMCODE) AS DSMDESC, (SELECT i.CATEGORY FROM product i WHERE i.ITEM_NO = l.ITEM_NO) AS ITEMCAT, (SELECT n.SKU FROM product n WHERE n.ITEM_NO = l.ITEM_NO) AS INAME, (SELECT p.PROD_CODE FROM product p WHERE p.ITEM_NO = l.ITEM_NO) AS PRODCAT, l.ID, l.DATABASE_NO, l.ORDER_TYPE, l.ORDER_NO, l.SEQUENCE_NO, l.ITEM_NO, l.LOCATION, l.QTY_ORDERED, l.QTY_TO_SHIP, l.UNIT_PRICE, l.REQUEST_DATE, l.QTY_BACK_ORDERED, l.QTY_RETURN_TO_STOCK, l.UNIT_OF_MEASURE, l.UNIT_COST, l.TOTAL_QTY_ORDERED, l.TOTAL_QTY_SHIPPED, l.PRICE_ORG, l.LAST_POST_DATE, l.ITEM_PROD_CAT, l.USER_FIELD_1, l.USER_FIELD_2, l.USER_FIELD_3, l.USER_FIELD_4, l.CUSTOMER, l.INVOICE_NO, l.INVOICE_DATE, IF(l.USER_FIELD_5 = l.CUSTOMER, '', '0') AS USER_FIELD_5 FROM oelinhst l WHERE TRIM(l.ORDER_TYPE) = 'o' AND l.UNIT_PRICE <> 0 AND l.INVOICE_NO < 81000000 AND l.INVOICE_DATE BETWEEN 20201200 AND 20201210 LIMIT 1000";
+    $sql = "SELECT (SELECT C.CUSTOMER FROM v_customer_info C WHERE TRIM(C.DBNO) = TRIM(l.DATABASE_NO) AND C.CUS_NO LIKE CONCAT ('%' , TRIM(l.CUSTOMER) , '%') LIMIT 1) AS CUSTOMERN, (SELECT A.ADDRESS FROM v_customer_info A WHERE A.DBNO = l.DATABASE_NO AND A.CUS_NO LIKE CONCAT ('%' , l.CUSTOMER , '%') LIMIT 1) AS ADDRESSC, (SELECT T.TIN_NO FROM v_customer_info T WHERE T.DBNO = l.DATABASE_NO AND T.CUS_NO LIKE CONCAT ('%' , l.CUSTOMER , '%') LIMIT 1) AS TINC, (SELECT t.CUST_TYPE_CODE FROM v_customer_type t WHERE t.DBNO = l.DATABASE_NO AND t.CUS_NO LIKE CONCAT ('%' , l.CUSTOMER , '%') LIMIT 1) AS TYPEC, (SELECT h.SALESMAN_NO1 FROM oehdrhst h WHERE h.DATABASE_NO = TRIM(l.DATABASE_NO) AND h.OE_NO = l.ORDER_NO LIMIT 1) AS SALESMAN, (SELECT p.dsm_code FROM psr p WHERE p.psr_code = SALESMAN) AS DSMCODE, (SELECT d.dsm_desc FROM dsm d WHERE d.dsm_code = DSMCODE) AS DSMDESC, (SELECT ds.DSMSORT FROM dsm ds WHERE ds.dsm_code = DSMCODE) AS DSMSORT, (SELECT i.CATEGORY FROM product i WHERE i.ITEM_NO = l.ITEM_NO) AS ITEMCAT, (SELECT n.SKU FROM product n WHERE n.ITEM_NO = l.ITEM_NO) AS INAME, (SELECT p.PROD_CODE FROM product p WHERE p.ITEM_NO = l.ITEM_NO) AS PRODCAT, l.ID, l.DATABASE_NO, l.ORDER_TYPE, l.ORDER_NO, l.SEQUENCE_NO, l.ITEM_NO, l.LOCATION, l.QTY_ORDERED, l.QTY_TO_SHIP, l.UNIT_PRICE, l.REQUEST_DATE, l.QTY_BACK_ORDERED, l.QTY_RETURN_TO_STOCK, l.UNIT_OF_MEASURE, l.UNIT_COST, l.TOTAL_QTY_ORDERED, l.TOTAL_QTY_SHIPPED, l.PRICE_ORG, l.LAST_POST_DATE, l.ITEM_PROD_CAT, l.USER_FIELD_1, l.USER_FIELD_2, l.USER_FIELD_3, l.USER_FIELD_4, l.CUSTOMER, l.INVOICE_NO, l.INVOICE_DATE, IF(l.USER_FIELD_5 = l.CUSTOMER, '', '0') AS USER_FIELD_5 FROM oelinhst l WHERE TRIM(l.ORDER_TYPE) = 'o' AND l.UNIT_PRICE <> 0 AND l.INVOICE_NO < 81000000 AND l.INVOICE_DATE BETWEEN 20200326 AND 20200399";
     $stm = $con->prepare($sql);
     $stm->execute();
     $results = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -36,18 +36,19 @@
             $CUSTOMER = $row['CUSTOMER'];
             $INVOICE_NO = $row['INVOICE_NO'];
             $INVOICE_DATE = $row['INVOICE_DATE'];
-            $INAME = $row['INAME'];
+            $INAME = preg_replace('/[^A-Za-z0-9-]/', '', $row['INAME']);
             $ITEMCAT = $row['ITEMCAT'];
             $PRODCAT = $row['PRODCAT'];
-            $SALESMAN = $row['SALESMAN'];
-
+            $SALESMAN = strtoupper($row['SALESMAN']);
             if (isset($row['SALESMAN'])) {
                 $DSMCODE = strtoupper(preg_replace('/\s+/', '', $row['DSMCODE']));
                 $DSMDESC = strtoupper(preg_replace('/\s+/', '', $row['DSMDESC']));
+                $DSMSORT = strtoupper(preg_replace('/\s+/', '', $row['DSMSORT']));
             }
             else {
                 $DSMCODE = $row['SALESMAN'];
                 $DSMDESC = '';
+                $DSMSORT = '';
             }
 
             if (isset($row['CUSTOMERN'])) {
@@ -86,7 +87,8 @@
                 "",
                 "$DATABASE_NO",
                 "$SALESMAN",
-                "$DSMCODE - $DSMDESC",
+                "$DSMCODE-$DSMDESC",
+                "$DSMSORT $DSMCODE-$DSMDESC",
                 "$branch",
                 "$ORDER_TYPE",
                 "$ORDER_NO",
