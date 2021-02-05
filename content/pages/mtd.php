@@ -30,59 +30,47 @@
 					        <thead>
 					            <tr>
 					            	<th></th>
-					            	<th>DBNO</th>
-					            	<th>SALESMAN</th>
-					            	<th>DSM</th>
-					            	<th>DSMSORT</th>
-					            	<th>BRANCH</th>
-					            	<th>OT</th>
-					            	<th>ORDER NO</th>
-					            	<th>SEQUENCE NO</th>
-					            	<th>ITEM NO</th>
-					            	<th>PROD CAT</th>
-					            	<th>ITEM CAT</th>
-					            	<th>SKU</th>
-					            	<th>LOCATION</th>
-					            	<th>QTY ORDERED</th>
-					            	<th>QTY TOSHIP</th>
-					            	<th>UNIT PRICE</th>
-					            	<th>REQUEST DATE</th>
-					            	<th>QBO</th>
-					            	<th>QRTS</th>
-					            	<th>UOM</th>
-					            	<th>UNIT COST</th>
-					            	<th>TQO</th>
-					            	<th>TQS</th>
-					            	<th>PRICE ORIG</th>
-					            	<th>LPD</th>
-					            	<th>IPC</th>
-					            	<th>UF1</th>
-					            	<th>UF2</th>
-					            	<th>UF3</th>
-					            	<th>UF4</th>
-					            	<th>UF5</th>
-					            	<th>CUSTOMER</th>
-					            	<th>ADDRESS</th>
-					            	<th>CUST TIN</th>
-					            	<th>CUST TYPE</th>
-					            	<th>PROVINCIAL</th>
-					            	<th>REGIONS</th>
-					            	<th>INVOICE NO</th>
-					            	<th>INVOICE DATE</th>
-					            	<th>GROSS</th>
-					            	<th>NET</th>
-					            	<th>Item</th>
-					            	<th>Category</th>
-					            	<th>QO</th>
-					            	<th>QTS</th>
-					            	<th>UC</th>
-					            	<th>UP</th>
-					            	<th>PO</th>
-					            	<th>Customer</th>
-					            	<th>Invoice Date</th>
-					            	<th>Area</th>
-					            	<th>Gross</th>
-					            	<th>Net</th>
+									<th>DBNO</th>
+									<th>SALESMAN</th>
+									<th>DSM</th>
+									<th>DSMSORT</th>
+									<th>BRANCH</th>
+									<th>OT</th>
+									<th>ORDERNO</th>
+									<th>SEQUENCENO</th>
+									<th>ITEMNO</th>
+									<th>PRODCAT</th>
+									<th>ITEMCAT</th>
+									<th>SKU</th>
+									<th>LOCATION</th>
+									<th>QTYORDERED</th>
+									<th>QTYTOSHIP</th>
+									<th>UNITPRICE</th>
+									<th>REQUESTDATE</th>
+									<th>QBO</th>
+									<th>QRTS</th>
+									<th>UOM</th>
+									<th>UNITCOST</th>
+									<th>TQO</th>
+									<th>TQS</th>
+									<th>PRICEORIG</th>
+									<th>LPD</th>
+									<th>IPC</th>
+									<th>UF1</th>
+									<th>UF2</th>
+									<th>UF3</th>
+									<th>UF4</th>
+									<th>UF5</th>
+									<th>CUSTOMER</th>
+									<th>ADDRESS</th>
+									<th>CUSTTIN</th>
+									<th>CUSTTYPE</th>
+									<th>PROVINCIAL</th>
+									<th>REGIONS</th>
+									<th>INVOICENO</th>
+									<th>INVOICEDATE</th>
+									<th>GROSS</th>
+									<th>NET</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -90,59 +78,47 @@
 					        <tfoot>
 					            <tr>
 					            	<th></th>
-					            	<th>DBNO</th>
-					            	<th>SALESMAN</th>
-					            	<th>DSM</th>
-					            	<th>DSMSORT</th>
-					            	<th>BRANCH</th>
-					            	<th>OT</th>
-					            	<th>ORDER NO</th>
-					            	<th>SEQUENCE NO</th>
-					            	<th>ITEM NO</th>
-					            	<th>ITEM CAT</th>
-					            	<th>PROD CAT</th>
-					            	<th>SKU</th>
-					            	<th>LOCATION</th>
-					            	<th>QTY ORDERED</th>
-					            	<th>QTY TOSHIP</th>
-					            	<th>UNIT PRICE</th>
-					            	<th>REQUEST DATE</th>
-					            	<th>QBO</th>
-					            	<th>QRTS</th>
-					            	<th>UOM</th>
-					            	<th>UNIT COST</th>
-					            	<th>TQO</th>
-					            	<th>TQS</th>
-					            	<th>PRICE ORIG</th>
-					            	<th>LPD</th>
-					            	<th>IPC</th>
-					            	<th>UF1</th>
-					            	<th>UF2</th>
-					            	<th>UF3</th>
-					            	<th>UF4</th>
-					            	<th>UF5</th>
-					            	<th>CUSTOMER</th>
-					            	<th>ADDRESS</th>
-					            	<th>CUST TIN</th>
-					            	<th>CUST TYPE</th>
-					            	<th>PROVINCIAL</th>
-					            	<th>REGIONS</th>
-					            	<th>INVOICE NO</th>
-					            	<th>INVOICE DATE</th>
-					            	<th>GROSS</th>
-					            	<th>NET</th>
-					            	<th>Item</th>
-					            	<th>Category</th>
-					            	<th>QO</th>
-					            	<th>QTS</th>
-					            	<th>UC</th>
-					            	<th>UP</th>
-					            	<th>PO</th>
-					            	<th>Customer</th>
-					            	<th>Invoice Date</th>
-					            	<th>Area</th>
-					            	<th>Gross</th>
-					            	<th>Net</th>
+									<th>DBNO</th>
+									<th>SALESMAN</th>
+									<th>DSM</th>
+									<th>DSMSORT</th>
+									<th>BRANCH</th>
+									<th>OT</th>
+									<th>ORDERNO</th>
+									<th>SEQUENCENO</th>
+									<th>ITEMNO</th>
+									<th>PRODCAT</th>
+									<th>ITEMCAT</th>
+									<th>SKU</th>
+									<th>LOCATION</th>
+									<th>QTYORDERED</th>
+									<th>QTYTOSHIP</th>
+									<th>UNITPRICE</th>
+									<th>REQUESTDATE</th>
+									<th>QBO</th>
+									<th>QRTS</th>
+									<th>UOM</th>
+									<th>UNITCOST</th>
+									<th>TQO</th>
+									<th>TQS</th>
+									<th>PRICEORIG</th>
+									<th>LPD</th>
+									<th>IPC</th>
+									<th>UF1</th>
+									<th>UF2</th>
+									<th>UF3</th>
+									<th>UF4</th>
+									<th>UF5</th>
+									<th>CUSTOMER</th>
+									<th>ADDRESS</th>
+									<th>CUSTTIN</th>
+									<th>CUSTTYPE</th>
+									<th>PROVINCIAL</th>
+									<th>REGIONS</th>
+									<th>INVOICENO</th>
+									<th>INVOICEDATE</th>
+									<th>GROSS</th>
+									<th>NET</th>
 					            </tr>
 					        </tfoot>
 					    </table>

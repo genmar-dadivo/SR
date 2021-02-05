@@ -23,7 +23,7 @@ if (window.location.href.indexOf("mtd") > -1) {
         sec = Math.floor((diff/1000) % 60);
         console.log('Duration ' + min + ':' + sec);
 
-        $('.buttons-excel').click();
+        $('.buttons-csv').click();
         });
         this.api().columns().every( function () {
           var that = this;
@@ -38,7 +38,7 @@ if (window.location.href.indexOf("mtd") > -1) {
       },
       buttons: [
         {
-          extend: "excel",
+          extend: "csv",
           className: "btn btn-sm btn-primary",
           text: 'Export',
           filename: 'Sales Report',

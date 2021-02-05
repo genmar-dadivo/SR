@@ -13,7 +13,8 @@
 	if (isset($_POST['rawdata'])) {
 		// cleaners
 		$rawdata = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $_POST['rawdata']);
-		$rawdata = str_replace(["'","UPDATE","OR ","INSERT","INTO","VALUES", "MATCHING","DATABASE_NO,ORDER_NO,SEQUENCE_NO","DATABASE_NO, OE_NO, CUSTOMER_NO","(", ")", ";"], "",$rawdata);
+		$rawdata = str_replace(["'","UPDATE","OR ","INSERT","INTO","VALUES", "MATCHING","DATABASE_NO,ORDER_NO,SEQUENCE_NO","DATABASE_NO, OE_NO, CUSTOMER_NO","(", ")", ";", "/"], "",$rawdata);
+		$rawdata = preg_replace('/\\\\/', '', $rawdata);
 		$rawdata = strtolower($rawdata);
 		// line mecha
 		if (strpos($rawdata, 'oelinhst') !== false AND strpos($rawdata, 'oehdrhst') === false) {
@@ -50,13 +51,10 @@
 				$USER_FIELD_5 = str_replace(' ', '', $data[23]);
 				$CUSTOMER = str_replace(' ', '', $data[24]);
 				$INVOICE_NO = str_replace(' ', '', $data[25]);
-
 				if (isset($data[26])) { $INVOICE_DATE = $data[26]; }
 				else { $INVOICE_DATE = ''; }
 				// checker
-
 				$sqlchecker = "SELECT ID, ORDER_NO, ITEM_NO FROM oelinhst WHERE DATABASE_NO = $DATABASE_NO AND ORDER_NO = '$ORDER_NO' AND ITEM_NO = '$ITEM_NO' AND UNIT_PRICE = '$UNIT_PRICE' AND INVOICE_DATE BETWEEN $start AND $end";
-				$sqlchecker = "SELECT ID, ORDER_NO, ITEM_NO FROM oelinhst WHERE DATABASE_NO = $DATABASE_NO AND ORDER_NO = '$ORDER_NO' AND ITEM_NO = '$ITEM_NO' AND UNIT_PRICE = '$UNIT_PRICE' " ;
 				$stmchecker = $con->prepare($sqlchecker);
 				$stmchecker->execute();
 				if ($stmchecker->rowCount() > 0) { $DATABASE_NO = "D" . $DATABASE_NO; }
