@@ -7,8 +7,7 @@ if (window.location.href.indexOf("mtd") > -1) {
         var title = $(this).text();
         $(this).html( '<input type="text" class="form-control">' );
     });
-
-    var table = $('#tmtd').DataTable( {
+    var table = $('#tmtd').DataTable({
       dom: 'Bfrtip',
       "ajax": '../../content/data/mtddata.php',
       initComplete: function (settings, json) {
