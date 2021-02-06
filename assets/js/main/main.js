@@ -9,7 +9,7 @@ if (window.location.href.indexOf("mtd") > -1) {
     });
     var table = $('#tmtd').DataTable({
       dom: 'Bfrtip',
-      "ajax": '../../content/data/mtddata.php',
+      "ajax": '../../content/data/ds.php',
       initComplete: function (settings, json) {
         $( "#overlay" ).fadeOut(500, function() {
         $( "#overlay" ).remove();
