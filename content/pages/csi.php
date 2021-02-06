@@ -33,13 +33,13 @@
 									<th>DBNO</th>
 									<th>OT</th>
 									<th>ORDERNO</th>
-									<th>OS</th>
-									<th>ODE</th>
-									<th>OD</th>
-									<th>OATN</th>
-									<th>OPON</th>
-									<th>OCN</th>
-									<th>CBM</th>
+									<th>SN</th>
+									<th>GIN</th>
+									<th>ITEMNO</th>
+									<th>LOCATION</th>
+									<th>QO</th>
+									<th>QTS</th>
+									<th>UP</th>
 									<th>SD</th>
 									<th>SHIPCODE</th>
 									<th>TERMS</th>

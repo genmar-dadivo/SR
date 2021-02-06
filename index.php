@@ -34,6 +34,7 @@
     <script src="assets/js/bs-notify/bootstrap-notify.min.js"></script>
     <script src="assets/js/bs/bootstrap.min.js"></script>
     <script src="assets/js/main/main.js?1"></script>
+    <script src="assets/js/push/push.min.js"></script>
 
 </body>
 </html>

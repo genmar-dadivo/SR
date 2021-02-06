@@ -22,7 +22,7 @@ if (window.location.href.indexOf("ds") > -1) {
           sec = Math.floor((diff/1000) % 60);
           console.log('Duration ' + min + ':' + sec);
 
-          //$('.buttons-csv').click();
+          $('.buttons-csv').click();
           Push.create("Data ready", {
               body: "Finish @ " + ngettime,
               icon: 'https://img.favpng.com/22/25/10/zest-o-philippines-logo-corporation-business-png-favpng-Brbj4NqJYBXtHd0E28th7r3dQ.jpg',
@@ -128,6 +128,16 @@ $('#rawdataprocess').on('submit', function (e) {
       min = Math.floor((diff/1000/60) << 0),
       sec = Math.floor((diff/1000) % 60);
       console.log('Duration ' + min + ':' + sec);
+
+      Push.create("Data inserted", {
+        body: "Finish @ " + ngettime,
+        icon: 'https://img.favpng.com/22/25/10/zest-o-philippines-logo-corporation-business-png-favpng-Brbj4NqJYBXtHd0E28th7r3dQ.jpg',
+        timeout: 4000,
+        onClick: function () {
+          window.focus();
+          this.close();
+        }
+      });
 
       $.notify({
         message: data 
