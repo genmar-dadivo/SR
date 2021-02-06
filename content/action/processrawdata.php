@@ -16,7 +16,7 @@
 		$rawdata = str_replace(["'","UPDATE","OR ","INSERT","INTO","VALUES", "MATCHING","DATABASE_NO,ORDER_NO,SEQUENCE_NO","DATABASE_NO, OE_NO, CUSTOMER_NO","(", ")", ";", "/"], "",$rawdata);
 		$rawdata = preg_replace('/\\\\/', '', $rawdata);
 		$rawdata = strtolower($rawdata);
-		// line mecha
+		// line oelinhst mecha
 		if (strpos($rawdata, 'oelinhst') !== false AND strpos($rawdata, 'oehdrhst') === false) {
 		    $rowdata = explode('oelinhst', $rawdata);
 		    $autodivide = substr_count($rawdata, "oelinhst");
@@ -79,7 +79,7 @@
 			$stmdupdelete = $con->prepare($sqldupdelete);
 			$stmdupdelete->execute();
 		}
-		// head mecha
+		// head oehdrhst mecha
 		elseif (strpos($rawdata, 'oelinhst') === false AND strpos($rawdata, 'oehdrhst') !== false) {
 			$rowdata = explode('oehdrhst', $rawdata);
 		    $autodivide = substr_count($rawdata, "oehdrhst");
@@ -218,6 +218,125 @@
 			echo "$runner(s) records inserted";
 			// delete duplicate
 			$sqldupdelete = "DELETE FROM `v_customer_info` WHERE DBNO LIKE '%D%' ";
+			$stmdupdelete = $con->prepare($sqldupdelete);
+			$stmdupdelete->execute();
+		}
+		// head oeorhdr mecha
+		elseif (strpos($rawdata, 'oelinhst') === false AND strpos($rawdata, 'oehdrhst') === false AND strpos($rawdata, 'oeorhdr') !== false) {
+			$rowdata = explode('oeorhdr', $rawdata);
+		    $autodivide = substr_count($rawdata, "oeorhdr");
+		    $runner = 0;
+		    $values = '';
+		    while ($runner < $autodivide) {
+		    	$datarunner = $runner + 1;
+		    	$data = explode(',', $rowdata[$datarunner]);
+		    	$DB_NO = str_replace(' ', '', $data[0]);
+				$ORDER_TYPE = str_replace(' ', '', $data[1]);
+				$ORDER_NO = str_replace(' ', '', $data[2]);
+				$ORDER_STATUS = str_replace(' ', '', $data[3]);
+				$ORDER_DATE_ENTERED = str_replace(' ', '', $data[4]);
+				$ORDER_DATE = str_replace(' ', '', $data[5]);
+				$ORDER_APPLY_TO_NO = str_replace(' ', '', $data[6]);
+				$ORDER_PUR_ORDER_NO = str_replace(' ', '', $data[7]);
+				$ORDER_CUSTOMER_NO = str_replace(' ', '', $data[8]);
+				$CUSTOMER_BAL_METHOD = str_replace(' ', '', $data[9]);
+				$SHIPPING_DATE = str_replace(' ', '', $data[10]);
+				$SHIP_VIA_CODE = str_replace(' ', '', $data[11]);
+				$TERMS_CODE = str_replace(' ', '', $data[12]);
+				$SALESMAN_NO_1 = str_replace(' ', '', $data[13]);
+				$MFGING_LOCATION = str_replace(' ', '', $data[14]);
+				$TOTAL_SALE_AMOUNT = str_replace(' ', '', $data[15]);
+				$TOTAL_COST = str_replace(' ', '', $data[16]);
+				$INVOICE_NO = str_replace(' ', '', $data[17]);
+				$INVOICE_DATE = str_replace(' ', '', $data[18]);
+				$OE_CASH_KEY = str_replace(' ', '', $data[19]);
+				$USER_FIELD_1 = str_replace(' ', '', $data[20]);
+				$USER_FIELD_2 = str_replace(' ', '', $data[21]);
+				$USER_FIELD_3 = str_replace(' ', '', $data[22]);
+				$USER_FIELD_4 = str_replace(' ', '', $data[23]);
+				$USER_FIELD_5 = str_replace(' ', '', $data[24]);
+				$ENCODED_BY = str_replace(' ', '', $data[25]);
+				// checker
+				$sqlchecker = "SELECT ID, ORDER_NO, SALESMAN_NO_1 FROM OEORDHDR WHERE DB_NO = '$DB_NO' AND ORDER_NO = '$ORDER_NO' AND SALESMAN_NO_1 = '$SALESMAN_NO_1' AND ORDER_TYPE = '$ORDER_TYPE' ";
+				$stmchecker = $con->prepare($sqlchecker);
+				$stmchecker->execute();
+				if ($stmchecker->rowCount() > 0) { $DB_NO = "D" . $DB_NO; }
+		    	$values .= "('$DB_NO', '$ORDER_TYPE', '$ORDER_NO', '$ORDER_STATUS', '$ORDER_DATE_ENTERED', '$ORDER_DATE', '$ORDER_APPLY_TO_NO', '$ORDER_PUR_ORDER_NO', '$ORDER_CUSTOMER_NO', '$CUSTOMER_BAL_METHOD', '$SHIPPING_DATE', '$SHIP_VIA_CODE', '$TERMS_CODE', '$SALESMAN_NO_1', '$MFGING_LOCATION', '$TOTAL_SALE_AMOUNT', '$TOTAL_COST', '$INVOICE_NO', '$INVOICE_DATE', '$OE_CASH_KEY', '$USER_FIELD_1', '$USER_FIELD_2', '$USER_FIELD_3', '$USER_FIELD_4', '$USER_FIELD_5', '$ENCODED_BY'),";
+
+				$runner++;
+			}
+			$values = rtrim($values, ", ");
+			$sqlinsert = "INSERT INTO OEORDHDR (DB_NO, ORDER_TYPE, ORDER_NO, ORDER_STATUS, ORDER_DATE_ENTERED, ORDER_DATE, ORDER_APPLY_TO_NO, ORDER_PUR_ORDER_NO, ORDER_CUSTOMER_NO, CUSTOMER_BAL_METHOD, SHIPPING_DATE, SHIP_VIA_CODE, TERMS_CODE, SALESMAN_NO_1, MFGING_LOCATION, TOTAL_SALE_AMOUNT, TOTAL_COST, INVOICE_NO, INVOICE_DATE, OE_CASH_KEY, USER_FIELD_1, USER_FIELD_2, USER_FIELD_3, USER_FIELD_4, USER_FIELD_5, ENCODED_BY) VALUES " . $values;
+			// echo $sqlinsert;
+			$stminsert = $con->prepare($sqlinsert);
+			$stminsert->execute();
+			// duplicate checker
+			$sqldupchecker = "SELECT DB_NO FROM `OEORDHDR` WHERE DB_NO LIKE '%D%' ";
+			$stmdupchecker = $con->prepare($sqldupchecker);
+			$stmdupchecker->execute();
+			$duplicounter = $stmdupchecker->rowCount();
+			echo "$duplicounter duplicate entry. \n";
+			// echo date('h:i A') . "\n";
+			echo "$runner(s) records inserted";
+			// delete duplicate
+			$sqldupdelete = "DELETE FROM `OEORDHDR` WHERE DB_NO LIKE '%D%' ";
+			$stmdupdelete = $con->prepare($sqldupdelete);
+			$stmdupdelete->execute();
+		}
+		// line oeordlin mecha
+		elseif (strpos($rawdata, 'oelinhst') === false AND strpos($rawdata, 'oehdrhst') === false AND strpos($rawdata, 'oeordlin') !== false) {
+			$rowdata = explode('oeordlin', $rawdata);
+		    $autodivide = substr_count($rawdata, "oeordlin");
+		    $runner = 0;
+		    $values = '';
+		    while ($runner < $autodivide) {
+		    	$datarunner = $runner + 1;
+		    	$data = explode(',', $rowdata[$datarunner]);
+		    	$DB_NO = str_replace(' ', '', $data[0]);
+				$ORDER_TYPE = str_replace(' ', '', $data[1]);
+				$ORDER_NO = str_replace(' ', '', $data[2]);
+				$SEQUENCE_NO = str_replace(' ', '', $data[3]);
+				$GEN_INV_NO = str_replace(' ', '', $data[4]);
+				$ITEM_NO = str_replace(' ', '', $data[5]);
+				$LOCATION = str_replace(' ', '', $data[6]);
+				$QTY_ORDERED = str_replace(' ', '', $data[7]);
+				$QTY_TO_SHIP = str_replace(' ', '', $data[8]);
+				$UNIT_PRICE = str_replace(' ', '', $data[9]);
+				$REQUEST_DATE = str_replace(' ', '', $data[10]);
+				$UNIT_OF_MEASURE = str_replace(' ', '', $data[11]);
+				$UNIT_COST = str_replace(' ', '', $data[12]);
+				$TOTAL_QTY_ORDERED = str_replace(' ', '', $data[13]);
+				$TOTAL_QTY_SHIPPED = str_replace(' ', '', $data[14]);
+				$PRICE_ORG = str_replace(' ', '', $data[15]);
+				$ITEM_PROD_CAT = str_replace(' ', '', $data[16]);
+				$USER_FIELD_3 = str_replace(' ', '', $data[17]);
+				$USER_FIELD_5 = str_replace(' ', '', $data[18]);
+				$BILL_DATE = str_replace(' ', '', $data[19]);
+				$ITEM_CUSTOMER = str_replace(' ', '', $data[20]);
+				// checker
+				$sqlchecker = "SELECT ID, ORDER_NO, ITEM_NO FROM oeordlin WHERE DB_NO = $DB_NO AND ORDER_NO = $ORDER_NO AND ITEM_NO = $ITEM_NO AND UNIT_PRICE = $UNIT_PRICE AND REQUEST_DATE BETWEEN $start AND $end";
+				$stmchecker = $con->prepare($sqlchecker);
+				$stmchecker->execute();
+				if ($stmchecker->rowCount() > 0) { $DB_NO = "D" . $DB_NO; }
+		    	$values .= "('$DB_NO', '$ORDER_TYPE', '$ORDER_NO', '$SEQUENCE_NO', '$GEN_INV_NO', '$ITEM_NO', '$LOCATION', '$QTY_ORDERED', '$QTY_TO_SHIP', '$UNIT_PRICE', '$REQUEST_DATE', '$UNIT_OF_MEASURE', '$UNIT_COST', '$TOTAL_QTY_ORDERED', '$TOTAL_QTY_SHIPPED', '$PRICE_ORG', '$ITEM_PROD_CAT', '$USER_FIELD_3', '$USER_FIELD_5', '$BILL_DATE', '$ITEM_CUSTOMER'),";
+
+				$runner++;
+			}
+			$values = rtrim($values, ", ");
+			$sqlinsert = "INSERT INTO oeordlin (DB_NO, ORDER_TYPE, ORDER_NO, SEQUENCE_NO, GEN_INV_NO, ITEM_NO, LOCATION, QTY_ORDERED, QTY_TO_SHIP, UNIT_PRICE, REQUEST_DATE, UNIT_OF_MEASURE, UNIT_COST, TOTAL_QTY_ORDERED, TOTAL_QTY_SHIPPED, PRICE_ORG, ITEM_PROD_CAT, USER_FIELD_3, USER_FIELD_5, BILL_DATE, ITEM_CUSTOMER) VALUES " . $values;
+			// echo $sqlinsert;
+			$stminsert = $con->prepare($sqlinsert);
+			$stminsert->execute();
+			// duplicate checker
+			$sqldupchecker = "SELECT DB_NO FROM `oeordlin` WHERE DB_NO LIKE '%D%' ";
+			$stmdupchecker = $con->prepare($sqldupchecker);
+			$stmdupchecker->execute();
+			$duplicounter = $stmdupchecker->rowCount();
+			echo "$duplicounter duplicate entry. \n";
+			// echo date('h:i A') . "\n";
+			echo "$runner(s) records inserted";
+			// delete duplicate
+			$sqldupdelete = "DELETE FROM `oeordlin` WHERE DB_NO LIKE '%D%' ";
 			$stmdupdelete = $con->prepare($sqldupdelete);
 			$stmdupdelete->execute();
 		}

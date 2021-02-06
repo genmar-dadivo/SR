@@ -13,7 +13,7 @@
 
     <link rel="icon" href="../../assets/img/logo/logo.png" type="image/gif" sizes="30x30">
 
-	<title> MTD | Sales Report </title>
+	<title> DS | Sales Report </title>
 </head>
 <body>
 	<div id="overlay">
@@ -26,7 +26,7 @@
 					<nav class="navbar navbar-light bg-light">
 					</nav>
 				  	<div class="card-body">
-				  		<table id="tmtd" class="table table-striped responsive nowrap" width="100%">
+				  		<table id="tds" class="table table-striped responsive nowrap" width="100%">
 					        <thead>
 					            <tr>
 					            	<th></th>
@@ -127,9 +127,6 @@
 			</div>
 		</div>
 	</div>
-	<?php
-	require '../parts/modal/mdlmtddata.php';
-	?>
     <script src="../../assets/js/jquery/jquery-3.3.1.min.js"></script>
     <script src="../../assets/js/popper/popper.min.js"></script>
     <script src="../../assets/js/bs/bootstrap.min.js"></script>
@@ -144,5 +141,6 @@
     <script src="../../assets/js/dt/pdfmake.min.js"></script>    
     <script src="../../assets/js/dt/vfs_fonts.js"></script> 
     <script src="../../assets/js/main/main.js?1"></script>
+    <script src="../../assets/js/push/push.min.js"></script>
 </body>
 </html>

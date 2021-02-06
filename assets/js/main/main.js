@@ -1,39 +1,48 @@
-if (window.location.href.indexOf("mtd") > -1) {
+if (window.location.href.indexOf("ds") > -1) {
   $(document).ready(function() {
     var d = new Date();
     var gettime = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
     console.log('%c Starts @ ' + gettime, 'background: #222; color: #bada55');
-    $('#tmtd tfoot th').each( function () {
+    $('#tds tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" class="form-control">' );
     });
-    var table = $('#tmtd').DataTable({
+    var table = $('#tds').DataTable({
       dom: 'Bfrtip',
       "ajax": '../../content/data/ds.php',
       initComplete: function (settings, json) {
-        $( "#overlay" ).fadeOut(500, function() {
-        $( "#overlay" ).remove();
-        $(".spinner-grow").addClass('hidden');
-        var nd = new Date();
-        var ngettime = nd.getHours() + ':' + nd.getMinutes() + ':' + nd.getSeconds();
-        console.log('Finish @ ' + ngettime);
-        var diff = Math.abs(d - nd),
-        min = Math.floor((diff/1000/60) << 0),
-        sec = Math.floor((diff/1000) % 60);
-        console.log('Duration ' + min + ':' + sec);
+          $( "#overlay" ).fadeOut(500, function() {
+          $( "#overlay" ).remove();
+          $(".spinner-grow").addClass('hidden');
+          var nd = new Date();
+          var ngettime = nd.getHours() + ':' + nd.getMinutes() + ':' + nd.getSeconds();
+          console.log('Finish @ ' + ngettime);
+          var diff = Math.abs(d - nd),
+          min = Math.floor((diff/1000/60) << 0),
+          sec = Math.floor((diff/1000) % 60);
+          console.log('Duration ' + min + ':' + sec);
 
-        $('.buttons-csv').click();
-        });
-        this.api().columns().every( function () {
-          var that = this;
-          $( 'input', this.footer() ).on( 'keyup change clear', function () {
-            if ( that.search() !== this.value ) {
-              that
-              .search( this.value )
-              .draw();
-            }
+          //$('.buttons-csv').click();
+          Push.create("Data ready", {
+              body: "Finish @ " + ngettime,
+              icon: 'https://img.favpng.com/22/25/10/zest-o-philippines-logo-corporation-business-png-favpng-Brbj4NqJYBXtHd0E28th7r3dQ.jpg',
+              timeout: 4000,
+              onClick: function () {
+                  window.focus();
+                  this.close();
+              }
           });
+      });
+      this.api().columns().every( function () {
+        var that = this;
+        $( 'input', this.footer() ).on( 'keyup change clear', function () {
+          if ( that.search() !== this.value ) {
+            that
+            .search( this.value )
+            .draw();
+          }
         });
+      });
       },
       buttons: [
         {
@@ -42,6 +51,13 @@ if (window.location.href.indexOf("mtd") > -1) {
           text: 'Export',
           filename: 'Sales Report',
           init: function(api, node, config) { $(node).removeClass('dt-button') }
+        },
+        {
+          className: "btn btn-sm btn-primary",
+          text: 'Load CSI',
+          action: function ( e, dt, node, config ) {
+
+          }
         },
         {
           extend: "copy",
@@ -133,12 +149,6 @@ $("select[name ='database']").on( "change", function() {
   if (dbname == 1) { $("select[name='choice']").prop('disabled', true); }
   else { $("select[name='choice']").prop('disabled', false); }
 });
-
-function getMTDdata(type, id) {
-  $('#mdlmtddata').modal('show');
-  console.log(id);
-  $("#putdata").load( "../../content/data/mtdsingledata.php?type=" + type + "&id=" + id );
-}
 
 function backupdb() {
   $.ajax({
