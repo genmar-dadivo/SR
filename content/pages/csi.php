@@ -31,31 +31,49 @@
 					            <tr>
 					            	<th></th>
 									<th>DBNO</th>
+									<th>STATUS</th>
+									<th>ODE</th>
+									<th>OATN</th>
+									<th>OPON</th>
+									<th>CUSNO</th>
+									<th>CUSBALMET</th>
+									<th>SD</th>
+									<th>SVC</th>
+									<th>TC</th>
+									<th>SALESMAN</th>
+									<th>DSM</th>
+									<th>DSMSORT</th>
+									<th>BRANCH</th>
 									<th>OT</th>
 									<th>ORDERNO</th>
 									<th>SN</th>
 									<th>GIN</th>
 									<th>ITEMNO</th>
+									<th>PRODCAT</th>
+									<th>ITEMCAT</th>
+									<th>SKU</th>
 									<th>LOCATION</th>
 									<th>QO</th>
 									<th>QTS</th>
 									<th>UP</th>
-									<th>SD</th>
-									<th>SHIPCODE</th>
-									<th>TERMS</th>
-									<th>SALESMAN</th>
-									<th>MFGNGLOC</th>
-									<th>TSA</th>
-									<th>TOTALCOST</th>
-									<th>INVOICENO</th>
-									<th>INVOICEDATE</th>
-									<th>OECASHKEY</th>
-									<th>UF1</th>
-									<th>UF2</th>
+									<th>RD</th>
+									<th>UOM</th>
+									<th>UC</th>
+									<th>TQO</th>
+									<th>PO</th>
+									<th>IPC</th>
 									<th>UF3</th>
-									<th>UF4</th>
 									<th>UF5</th>
-									<th>ENCDBY</th>
+									<th>BD</th>
+									<th>CUSTOMER</th>
+									<th>ADDRESS</th>
+									<th>CUSTTIN</th>
+									<th>CUSTTYPE</th>
+									<th>BD</th>
+									<th>PROVINCIAL</th>
+									<th>REGIONS</th>
+									<th>GROSS</th>
+									<th>NET</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -64,31 +82,49 @@
 					            <tr>
 					            	<th></th>
 									<th>DBNO</th>
-									<th>OT</th>
-									<th>ORDERNO</th>
-									<th>OS</th>
+									<th>STATUS</th>
 									<th>ODE</th>
-									<th>OD</th>
 									<th>OATN</th>
 									<th>OPON</th>
-									<th>OCN</th>
-									<th>CBM</th>
+									<th>CUSNO</th>
+									<th>CUSBALMET</th>
 									<th>SD</th>
-									<th>SHIPCODE</th>
-									<th>TERMS</th>
+									<th>SVC</th>
+									<th>TC</th>
 									<th>SALESMAN</th>
-									<th>MFGNGLOC</th>
-									<th>TSA</th>
-									<th>TOTALCOST</th>
-									<th>INVOICENO</th>
-									<th>INVOICEDATE</th>
-									<th>OECASHKEY</th>
-									<th>UF1</th>
-									<th>UF2</th>
+									<th>DSM</th>
+									<th>DSMSORT</th>
+									<th>BRANCH</th>
+									<th>OT</th>
+									<th>ORDERNO</th>
+									<th>SN</th>
+									<th>GIN</th>
+									<th>ITEMNO</th>
+									<th>PRODCAT</th>
+									<th>ITEMCAT</th>
+									<th>SKU</th>
+									<th>LOCATION</th>
+									<th>QO</th>
+									<th>QTS</th>
+									<th>UP</th>
+									<th>RD</th>
+									<th>UOM</th>
+									<th>UC</th>
+									<th>TQO</th>
+									<th>PO</th>
+									<th>IPC</th>
 									<th>UF3</th>
-									<th>UF4</th>
 									<th>UF5</th>
-									<th>ENCDBY</th>
+									<th>BD</th>
+									<th>CUSTOMER</th>
+									<th>ADDRESS</th>
+									<th>CUSTTIN</th>
+									<th>CUSTTYPE</th>
+									<th>BD</th>
+									<th>PROVINCIAL</th>
+									<th>REGIONS</th>
+									<th>GROSS</th>
+									<th>NET</th>
 					            </tr>
 					        </tfoot>
 					    </table>
@@ -111,5 +147,6 @@
     <script src="../../assets/js/dt/pdfmake.min.js"></script>    
     <script src="../../assets/js/dt/vfs_fonts.js"></script> 
     <script src="../../assets/js/main/main.js?1"></script>
+    <script src="../../assets/js/push/push.min.js"></script>
 </body>
 </html>
