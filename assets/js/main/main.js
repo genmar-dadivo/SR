@@ -55,9 +55,7 @@ if (window.location.href.indexOf("ds") > -1) {
         {
           className: "btn btn-sm btn-primary",
           text: 'Load CSI',
-          action: function ( e, dt, node, config ) {
-
-          }
+          action: function ( e, dt, node, config ) { window.location.replace("csi.php"); }
         },
         {
           extend: "copy",
@@ -211,9 +209,7 @@ if (window.location.href.indexOf("csi") > -1) {
         {
           className: "btn btn-sm btn-primary",
           text: 'Load DS',
-          action: function ( e, dt, node, config ) {
-
-          }
+          action: function ( e, dt, node, config ) { window.location.replace("ds.php"); }
         },
         {
           extend: "copy",

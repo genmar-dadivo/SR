@@ -38,7 +38,7 @@
     FROM oeordlin l
     WHERE l.DB_NO IN ($DB) AND l.ORDER_NO BETWEEN $US AND $USE 
     AND l.USER_FIELD_5 = ''
-    AND l.REQUEST_DATE BETWEEN $STARTER AND $ENDER";
+    AND l.REQUEST_DATE BETWEEN $STARTER AND $ENDER LIMIT 1";
     $stm = $con->prepare($sql);
     $stm->execute();
     $results = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -77,6 +77,7 @@
             $UNIT_OF_MEASURE = strtoupper($row['UNIT_OF_MEASURE']);
             $UNIT_COST = $row['UNIT_COST'];
             $TOTAL_QTY_ORDERED = $row['TOTAL_QTY_ORDERED'];
+            $TOTAL_QTY_SHIPPED = $row['TOTAL_QTY_SHIPPED'];
             $PRICE_ORG = $row['PRICE_ORG'];
             $ITEM_PROD_CAT = strtoupper($row['ITEM_PROD_CAT']);
             $USER_FIELD_3 = $row['USER_FIELD_3'];
@@ -131,7 +132,7 @@
             $net = $QTY_TO_SHIP *  $UNIT_PRICE;
             if ($PRODCAT == 'RTD') { $PRODCAT = '1. RTD'; }
             elseif ($PRODCAT == 'DAIRY') { $PRODCAT = '2. DAIRY'; }
-            elseif ($PRODCAT == 'NCB') { $PRODCAT = '3. DAIRY'; }
+            elseif ($PRODCAT == 'NCB & CSD') { $PRODCAT = '3. NCB & CSD'; }
             elseif ($PRODCAT == 'FOOD') { $PRODCAT = '4. FOOD'; }
             elseif ($PRODCAT == 'POWDER') { $PRODCAT = '5. POWDER'; }
             $output['data'][] = array(
@@ -166,6 +167,7 @@
                 "$UNIT_OF_MEASURE",
                 "$UNIT_COST",
                 "$TOTAL_QTY_ORDERED",
+                "$TOTAL_QTY_SHIPPED",
                 "$PRICE_ORG",
                 "$ITEM_PROD_CAT",
                 "$USER_FIELD_3",
@@ -175,7 +177,6 @@
                 "$ADDRESSC",
                 "$TINC",
                 "$TYPEC",
-                "$BILL_DATE",
                 "N/A",
                 "$AREA",
                 "$net",

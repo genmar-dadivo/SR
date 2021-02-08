@@ -24,8 +24,8 @@
     l.PRICE_ORG, l.LAST_POST_DATE, l.ITEM_PROD_CAT, l.USER_FIELD_1, l.USER_FIELD_2, l.USER_FIELD_3, l.USER_FIELD_4, l.CUSTOMER, 
     l.INVOICE_NO, l.INVOICE_DATE, IF(l.USER_FIELD_5 = l.CUSTOMER, '', '0') AS USER_FIELD_5 
     FROM oelinhst l 
-    WHERE l.DATABASE_NO IN () AND USER_FIELD_5 = '' AND TRIM(l.ORDER_TYPE) = 'o' AND l.UNIT_PRICE <> 0 
-    AND l.INVOICE_NO < $US AND l.INVOICE_DATE BETWEEN $STARTER AND $ENDER";
+    WHERE l.DATABASE_NO IN ($DB) AND USER_FIELD_5 = '' AND TRIM(l.ORDER_TYPE) = 'o' AND l.UNIT_PRICE <> 0 
+    AND l.INVOICE_NO < $US AND l.INVOICE_DATE BETWEEN $STARTER AND $ENDER LIMIT 1";
     $stm = $con->prepare($sql);
     $stm->execute();
     $results = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -117,7 +117,7 @@
             $net = $QTY_TO_SHIP *  $UNIT_PRICE;
             if ($ITEMCAT == 'RTD') { $ITEMCAT = '1. RTD'; }
             elseif ($ITEMCAT == 'DAIRY') { $ITEMCAT = '2. DAIRY'; }
-            elseif ($ITEMCAT == 'NCB') { $ITEMCAT = '3. DAIRY'; }
+            elseif ($ITEMCAT == 'NCB & CSD') { $ITEMCAT = '3. NCB & CSD'; }
             elseif ($ITEMCAT == 'FOOD') { $ITEMCAT = '4. FOOD'; }
             elseif ($ITEMCAT == 'POWDER') { $ITEMCAT = '5. POWDER'; }
             $output['data'][] = array(

@@ -49,17 +49,18 @@
 									<th>SN</th>
 									<th>GIN</th>
 									<th>ITEMNO</th>
-									<th>PRODCAT</th>
 									<th>ITEMCAT</th>
+									<th>PRODCAT</th>
 									<th>SKU</th>
 									<th>LOCATION</th>
-									<th>QO</th>
-									<th>QTS</th>
-									<th>UP</th>
+									<th>QTYORDERED</th>
+									<th>QTYTSHIP</th>
+									<th>UNITPRICE</th>
 									<th>RD</th>
 									<th>UOM</th>
 									<th>UC</th>
 									<th>TQO</th>
+									<th>TQS</th>
 									<th>PO</th>
 									<th>IPC</th>
 									<th>UF3</th>
@@ -69,7 +70,6 @@
 									<th>ADDRESS</th>
 									<th>CUSTTIN</th>
 									<th>CUSTTYPE</th>
-									<th>BD</th>
 									<th>PROVINCIAL</th>
 									<th>REGIONS</th>
 									<th>GROSS</th>
@@ -100,17 +100,18 @@
 									<th>SN</th>
 									<th>GIN</th>
 									<th>ITEMNO</th>
-									<th>PRODCAT</th>
 									<th>ITEMCAT</th>
+									<th>PRODCAT</th>
 									<th>SKU</th>
 									<th>LOCATION</th>
-									<th>QO</th>
-									<th>QTS</th>
-									<th>UP</th>
+									<th>QTYORDERED</th>
+									<th>QTYTSHIP</th>
+									<th>UNITPRICE</th>
 									<th>RD</th>
 									<th>UOM</th>
 									<th>UC</th>
 									<th>TQO</th>
+									<th>TQS</th>
 									<th>PO</th>
 									<th>IPC</th>
 									<th>UF3</th>
@@ -120,7 +121,6 @@
 									<th>ADDRESS</th>
 									<th>CUSTTIN</th>
 									<th>CUSTTYPE</th>
-									<th>BD</th>
 									<th>PROVINCIAL</th>
 									<th>REGIONS</th>
 									<th>GROSS</th>
