@@ -10,7 +10,7 @@
 
     <link rel="icon" href="assets/img/logo/logo.png" type="image/gif" sizes="30x30">
 
-	<title> Sales Report </title>
+	<title> Uploading | SR </title>
 </head>
 <body>
 	<div class="container">

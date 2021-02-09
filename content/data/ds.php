@@ -4,8 +4,8 @@
     //settings
     $US = 90000000;
     $DB = '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16';
-    $STARTER = 20200100;
-    $ENDER = 20200199;
+    $STARTER = 20201200;
+    $ENDER = 20211215;
     $sql = "SELECT 
     (SELECT C.CUSTOMER FROM v_customer_info C WHERE TRIM(C.DBNO) = TRIM(l.DATABASE_NO) 
     AND C.CUS_NO LIKE CONCAT ('%' , TRIM(l.CUSTOMER) , '%') LIMIT 1) AS CUSTOMERN, 
@@ -118,6 +118,7 @@
             if ($ITEMCAT == 'RTD') { $ITEMCAT = '1. RTD'; }
             elseif ($ITEMCAT == 'DAIRY') { $ITEMCAT = '2. DAIRY'; }
             elseif ($ITEMCAT == 'NCB & CSD') { $ITEMCAT = '3. NCB & CSD'; }
+            elseif ($ITEMCAT == 'NCBCSD') { $ITEMCAT = '3. NCB & CSD'; }
             elseif ($ITEMCAT == 'FOOD') { $ITEMCAT = '4. FOOD'; }
             elseif ($ITEMCAT == 'POWDER') { $ITEMCAT = '5. POWDER'; }
             $output['data'][] = array(
@@ -194,7 +195,9 @@
                 "",
                 "",
                 "",
-                "No Data",
+                "",
+                "",
+                "",
                 "",
                 "",
                 "",

@@ -314,7 +314,7 @@
 				$BILL_DATE = str_replace(' ', '', $data[19]);
 				$ITEM_CUSTOMER = str_replace(' ', '', $data[20]);
 				// checker
-				$sqlchecker = "SELECT ID, ORDER_NO, ITEM_NO FROM oeordlin WHERE DB_NO = $DB_NO AND ORDER_NO = $ORDER_NO AND ITEM_NO = $ITEM_NO AND UNIT_PRICE = $UNIT_PRICE AND REQUEST_DATE BETWEEN $start AND $end";
+				$sqlchecker = "SELECT ID, ORDER_NO, ITEM_NO FROM oeordlin WHERE DB_NO = $DB_NO AND ORDER_NO = $ORDER_NO AND ITEM_NO = '$ITEM_NO' AND UNIT_PRICE = '$UNIT_PRICE' AND REQUEST_DATE BETWEEN $start AND $end";
 				$stmchecker = $con->prepare($sqlchecker);
 				$stmchecker->execute();
 				if ($stmchecker->rowCount() > 0) { $DB_NO = "D" . $DB_NO; }
