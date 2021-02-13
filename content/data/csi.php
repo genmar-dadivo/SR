@@ -5,8 +5,9 @@
     $US = 40000000;
     $USE = 49999999;
     $DB = '1';
-    $STARTER = 20210100;
-    $ENDER = 20210199;
+    $STARTER = 20200100;
+    $ENDER = 20200199;
+    $limit = '';
     $sql = "SELECT
     (SELECT os.ORDER_STATUS FROM oeordhdr os WHERE os.DB_NO = l.DB_NO AND os.ORDER_NO = l.ORDER_NO) AS ORDERSTATUS,
     (SELECT ode.ORDER_DATE_ENTERED FROM oeordhdr ode WHERE ode.DB_NO = l.DB_NO AND ode.ORDER_NO =l.ORDER_NO) AS ORDERDATEENTERED,
@@ -38,7 +39,7 @@
     FROM oeordlin l
     WHERE l.DB_NO IN ($DB) AND l.ORDER_NO BETWEEN $US AND $USE 
     AND l.USER_FIELD_5 = ''
-    AND l.REQUEST_DATE BETWEEN $STARTER AND $ENDER LIMIT 1";
+    AND l.REQUEST_DATE BETWEEN $STARTER AND $ENDER $limit";
     $stm = $con->prepare($sql);
     $stm->execute();
     $results = $stm->fetchAll(PDO::FETCH_ASSOC);

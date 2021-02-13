@@ -4,8 +4,9 @@
     //settings
     $US = 90000000;
     $DB = '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16';
-    $STARTER = 20201200;
-    $ENDER = 20211215;
+    $STARTER = 20201216;
+    $ENDER = 20201299;
+    $limit = 'LIMIT 1';
     $sql = "SELECT 
     (SELECT C.CUSTOMER FROM v_customer_info C WHERE TRIM(C.DBNO) = TRIM(l.DATABASE_NO) 
     AND C.CUS_NO LIKE CONCAT ('%' , TRIM(l.CUSTOMER) , '%') LIMIT 1) AS CUSTOMERN, 
@@ -25,7 +26,7 @@
     l.INVOICE_NO, l.INVOICE_DATE, IF(l.USER_FIELD_5 = l.CUSTOMER, '', '0') AS USER_FIELD_5 
     FROM oelinhst l 
     WHERE l.DATABASE_NO IN ($DB) AND USER_FIELD_5 = '' AND TRIM(l.ORDER_TYPE) = 'o' AND l.UNIT_PRICE <> 0 
-    AND l.INVOICE_NO < $US AND l.INVOICE_DATE BETWEEN $STARTER AND $ENDER";
+    AND l.INVOICE_NO < $US AND l.INVOICE_DATE BETWEEN $STARTER AND $ENDER $limit";
     $stm = $con->prepare($sql);
     $stm->execute();
     $results = $stm->fetchAll(PDO::FETCH_ASSOC);
