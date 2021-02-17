@@ -5,8 +5,8 @@
     $US = 40000000;
     $USE = 49999999;
     $DB = '1';
-    $STARTER = 20200100;
-    $ENDER = 20200199;
+    $S = 20201200;
+    $E = 20201299;
     $limit = '';
     $sql = "SELECT
     (SELECT os.ORDER_STATUS FROM oeordhdr os WHERE os.DB_NO = l.DB_NO AND os.ORDER_NO = l.ORDER_NO) AS ORDERSTATUS,
@@ -39,7 +39,7 @@
     FROM oeordlin l
     WHERE l.DB_NO IN ($DB) AND l.ORDER_NO BETWEEN $US AND $USE 
     AND l.USER_FIELD_5 = ''
-    AND l.REQUEST_DATE BETWEEN $STARTER AND $ENDER $limit";
+    AND l.REQUEST_DATE BETWEEN $S AND $E $limit";
     $stm = $con->prepare($sql);
     $stm->execute();
     $results = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -128,6 +128,7 @@
             elseif (in_array($DSMCODE, $GT)) { $AREA = '4. GEN TRADE'; }
             elseif (in_array($DSMCODE, $V)) { $AREA = '5. VISAYAS'; }
             elseif (in_array($DSMCODE, $M)) { $AREA = '6. MINDANAO'; }
+            else { $AREA = 'N/A'; }
             // gross net mecha
             $gross = $QTY_TO_SHIP * $PRICE_ORG;
             $net = $QTY_TO_SHIP *  $UNIT_PRICE;
@@ -139,15 +140,6 @@
             $output['data'][] = array(
                 "",
                 "$DB_NO",
-                "$ORDERSTATUS",
-                "$ORDERDATEENTERED",
-                "$ORDERAPPLYTONO",
-                "$ORDERPURORDERNO",
-                "$ORDERCUSTOMERNO",
-                "$CUSTOMERBALMETHOD",
-                "$SHIPPINGDATE",
-                "$SHIPVIACODE",
-                "$TERMSCODE",
                 "$SALESMAN",
                 "$DSMCODE-$DSMDESC",
                 "$DSMSORT $DSMCODE-$DSMDESC",
@@ -155,38 +147,55 @@
                 "$ORDER_TYPE",
                 "$ORDER_NO",
                 "$SEQUENCE_NO",
-                "$GEN_INV_NO",
                 "$ITEM_NO",
-                "$ITEMCAT",
                 "$PRODCAT",
+                "$ITEMCAT",
                 "$INAME",
                 "$LOCATION",
                 "$QTY_ORDERED",
                 "$QTY_TO_SHIP",
                 "$UNIT_PRICE",
                 "$REQUEST_DATE",
+                "",
+                "",
                 "$UNIT_OF_MEASURE",
                 "$UNIT_COST",
                 "$TOTAL_QTY_ORDERED",
                 "$TOTAL_QTY_SHIPPED",
                 "$PRICE_ORG",
+                "",
                 "$ITEM_PROD_CAT",
+                "",
+                "",
                 "$USER_FIELD_3",
+                "",
                 "$USER_FIELD_5",
-                "$BILL_DATE",
                 "$CUSTOMERN",
                 "$ADDRESSC",
                 "$TINC",
-                "$TYPEC",
+                "",
                 "N/A",
                 "$AREA",
+                "$ORDER_NO",
+                "$BILL_DATE",
+                "$gross",
                 "$net",
-                "$gross"
             );
         }
     }
     else {
         $output['data'][] = array(
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
                 "",
                 "",
                 "",

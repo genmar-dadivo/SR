@@ -9,7 +9,6 @@
 	$start = 00000000;
 	$end = 99999999;
 	require '../dbase/dbconfig.php';
-	
 	if (isset($_POST['rawdata'])) {
 		// cleaners
 		$rawdata = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $_POST['rawdata']);
@@ -319,7 +318,6 @@
 				$stmchecker->execute();
 				if ($stmchecker->rowCount() > 0) { $DB_NO = "D" . $DB_NO; }
 		    	$values .= "('$DB_NO', '$ORDER_TYPE', '$ORDER_NO', '$SEQUENCE_NO', '$GEN_INV_NO', '$ITEM_NO', '$LOCATION', '$QTY_ORDERED', '$QTY_TO_SHIP', '$UNIT_PRICE', '$REQUEST_DATE', '$UNIT_OF_MEASURE', '$UNIT_COST', '$TOTAL_QTY_ORDERED', '$TOTAL_QTY_SHIPPED', '$PRICE_ORG', '$ITEM_PROD_CAT', '$USER_FIELD_3', '$USER_FIELD_5', '$BILL_DATE', '$ITEM_CUSTOMER'),";
-
 				$runner++;
 			}
 			$values = rtrim($values, ", ");
@@ -340,8 +338,66 @@
 			$stmdupdelete = $con->prepare($sqldupdelete);
 			$stmdupdelete->execute();
 		}
+		// noah oeordlin mecha
+		elseif (strpos($rawdata, 'oelinhst') === false AND strpos($rawdata, 'oehdrhst') === false AND strpos($rawdata, 'noah') !== false) {
+			$rowdata = explode('noah', $rawdata);
+		    $autodivide = substr_count($rawdata, "noah");
+		    $runner = 0;
+		    $values = '';
+		    while ($runner < $autodivide) {
+		    	$datarunner = $runner + 1;
+		    	$data = explode(',', $rowdata[$datarunner]);
+		    	$DBNO = str_replace(' ', '', $data[0]);
+				$BRANCH_NAME = str_replace(' ', '', $data[1]);
+				$DSM = str_replace(' ', '', $data[2]);
+				$SALESMAN_CODE = str_replace(' ', '', $data[3]);
+				$TAON = str_replace(' ', '', $data[4]);
+				$BUWAN = str_replace(' ', '', $data[5]);
+				$ARAW = str_replace(' ', '', $data[6]);
+				$SELLING_TYPE = str_replace(' ', '', $data[7]);
+				$CUSTOMERS = str_replace(' ', '', $data[8]);
+				$ADDRESS = $data[9];
+				$TIN = str_replace(' ', '', $data[10]);
+				$CUSTOMERS_TYPE = str_replace(' ', '', $data[11]);
+				$PROVINCIAL = str_replace(' ', '', $data[12]);
+				$ACCOUNTS = str_replace(' ', '', $data[13]);
+				$CATEGORY = $data[14];
+				$PRODUCT_CATEGORY = $data[15];
+				$SKU = str_replace(' ', '', $data[16]);
+				$UOM = str_replace(' ', '', $data[17]);
+				$QTY = str_replace(' ', '', $data[18]);
+				$AMOUNT = str_replace(' ', '', $data[19]);
+				$NET_AMOUNT = str_replace(' ', '', $data[20]);
+				$TRANSDATE = str_replace(' ', '', $data[21]);
+				$NOAH_INV_NO = str_replace(' ', '', $data[22]);
+				$MANUAL_INV_NO = str_replace(' ', '', $data[23]);
+				$DATE_CONFIRMED = str_replace(' ', '', $data[24]);
+				// checker
+				$sqlchecker = "SELECT id, DBNO FROM noah_oelinhst WHERE DBNO = '$DBNO' AND SKU = '$SKU' AND TAON = $TAON AND BUWAN = $BUWAN AND ARAW = $ARAW";
+				$stmchecker = $con->prepare($sqlchecker);
+				$stmchecker->execute();
+				if ($stmchecker->rowCount() > 0) { $DBNO = "DUPLI" . $DBNO; }
+				$values .= "('$DBNO', '$BRANCH_NAME', '$DSM', '$SALESMAN_CODE', $TAON, $BUWAN, $ARAW, '$SELLING_TYPE', '$CUSTOMERS', '$ADDRESS', '$TIN', '$CUSTOMERS_TYPE', '$PROVINCIAL', '$ACCOUNTS', '$CATEGORY', '$PRODUCT_CATEGORY', '$SKU', '$UOM', '$QTY', '$AMOUNT', '$NET_AMOUNT', '$TRANSDATE', '$NOAH_INV_NO', '$MANUAL_INV_NO', '$DATE_CONFIRMED'),";
+				$runner++;
+			}
+			$values = rtrim($values, ", ");
+			$sqlinsert = "INSERT INTO noah_oelinhst (DBNO, BRANCH_NAME, DSM, SALESMAN_CODE, TAON, BUWAN, ARAW, SELLING_TYPE, CUSTOMERS, ADDRESS, TIN, CUSTOMERS_TYPE, PROVINCIAL, ACCOUNTS, CATEGORY, PRODUCT_CATEGORY, SKU, UOM, QTY, AMOUNT, NET_AMOUNT, TRANSDATE, NOAH_INV_NO, MANUAL_INV_NO, DATE_CONFIRMED) VALUES " . $values;
+			// echo $sqlinsert;
+			$stminsert = $con->prepare($sqlinsert);
+			$stminsert->execute();
+			// duplicate checker
+			$sqldupchecker = "SELECT DBNO FROM `noah_oelinhst` WHERE DBNO LIKE '%DUPLI%' ";
+			$stmdupchecker = $con->prepare($sqldupchecker);
+			$stmdupchecker->execute();
+			$duplicounter = $stmdupchecker->rowCount();
+			echo "$duplicounter duplicate entry. \n";
+			// echo date('h:i A') . "\n";
+			echo "$runner(s) records inserted";
+			// delete duplicate
+			$sqldupdelete = "DELETE FROM `noah_oelinhst` WHERE DBNO LIKE '%DUPLI%' ";
+			$stmdupdelete = $con->prepare($sqldupdelete);
+			$stmdupdelete->execute();
+		}
 		else { echo "Error"; }
-
-		
 	}
 ?>

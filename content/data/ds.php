@@ -4,9 +4,9 @@
     //settings
     $US = 90000000;
     $DB = '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16';
-    $STARTER = 20201216;
+    $STARTER = 20201200;
     $ENDER = 20201299;
-    $limit = 'LIMIT 1';
+    $limit = '';
     $sql = "SELECT 
     (SELECT C.CUSTOMER FROM v_customer_info C WHERE TRIM(C.DBNO) = TRIM(l.DATABASE_NO) 
     AND C.CUS_NO LIKE CONCAT ('%' , TRIM(l.CUSTOMER) , '%') LIMIT 1) AS CUSTOMERN, 

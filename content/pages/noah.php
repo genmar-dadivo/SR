@@ -13,7 +13,7 @@
 
     <link rel="icon" href="../../assets/img/logo/logo.png" type="image/gif" sizes="30x30">
 
-	<title> CSI | Sales Report </title>
+	<title> NOAH | Sales Report </title>
 </head>
 <body>
 	<div id="overlay">
@@ -26,7 +26,7 @@
 					<nav class="navbar navbar-light bg-light">
 					</nav>
 				  	<div class="card-body">
-				  		<table id="tcsi" class="table table-striped responsive nowrap" width="100%">
+				  		<table id="tnoah" class="table table-striped responsive nowrap" width="100%">
 					        <thead>
 					            <tr>
 					            	<th></th>
