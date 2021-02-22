@@ -3,7 +3,7 @@
 	require "../dbase/dbconfig.php";
 	//settings
     $T = 2020;
-    $B = 10;
+    $B = 9;
     $S = 0;
     $E = 99;
     $limit = '';
@@ -11,7 +11,7 @@
     SUBSTRING(DSM, 1, 3) AS DSMCODE,
     SUBSTRING(SKU, 1, 7) AS ITEMNO,
     (SELECT ds.DSMSORT FROM dsm ds WHERE ds.dsm_code = DSMCODE) AS DSMSORT,
-    (SELECT p.PROD_CODE FROM product p WHERE p.ITEM_NO = ITEM_NO LIMIT 1) AS PRODCAT, 
+    (SELECT p.PROD_CODE FROM product p WHERE p.ITEM_NO = ITEMNO LIMIT 1) AS PRODCAT, 
     nl.*
     FROM noah_oelinhst nl
     WHERE
@@ -39,9 +39,9 @@
             $CUSTOMERS_TYPE = strtoupper($row['CUSTOMERS_TYPE']);
             $PROVINCIAL = strtoupper($row['PROVINCIAL']);
             $ACCOUNTS = $row['ACCOUNTS'];
-            $CATEGORY = strtoupper($row['CATEGORY']);
-            $PRODUCT_CATEGORY = strtoupper($row['PRODUCT_CATEGORY']);
-            $SKU = strtoupper($row['SKU']);
+            $CATEGORY = strtoupper(preg_replace('/\s+/', ' ',$row['CATEGORY']));
+            $PRODUCT_CATEGORY = strtoupper(preg_replace('/\s+/', ' ',$row['PRODUCT_CATEGORY']));
+            $SKU = strtoupper(preg_replace('/[^A-Za-z0-9-]/', '', $row['SKU']));
             $UOM = strtoupper($row['UOM']);
             $QTY = $row['QTY'];
             $AMOUNT = $row['AMOUNT'];
@@ -84,8 +84,8 @@
                 "$NOAH_INV_NO",
                 "",
                 "$ITEMNO",
-                "$PRODCAT",
                 "$PRODUCT_CATEGORY",
+                "$PRODCAT",
                 "$SKU",
                 "",
                 "$QTY",

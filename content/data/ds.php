@@ -3,9 +3,9 @@
     require "../dbase/dbconfig.php";
     //settings
     $US = 90000000;
-    $DB = '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16';
-    $STARTER = 20201200;
-    $ENDER = 20201299;
+    $DB = '1';
+    $STARTER = 20210100;
+    $ENDER = 20210199;
     $limit = '';
     $sql = "SELECT 
     (SELECT C.CUSTOMER FROM v_customer_info C WHERE TRIM(C.DBNO) = TRIM(l.DATABASE_NO) 
@@ -64,10 +64,10 @@
             $IDY = substr($INVOICE_DATE, 0, 4);
             $IDM = substr($INVOICE_DATE, 4, 2);
             $IDD = substr($INVOICE_DATE, 6, 2);
-            $INAME = preg_replace('/[^A-Za-z0-9-]/', '', $row['INAME']);
-            $ITEMCAT = $row['ITEMCAT'];
+            $INAME = strtoupper(preg_replace('/[^A-Za-z0-9-]/', '', $row['INAME']));
+            $ITEMCAT = strtoupper(preg_replace('/\s+/', ' ',$row['ITEMCAT']));
             $PRODCAT = preg_replace('/\s+/', '', $row['PRODCAT']);
-            $PRODCAT = preg_replace('/[^a-zA-Z0-9\']/', '', $row['PRODCAT']);
+            $PRODCAT = strtoupper(preg_replace('/[^a-zA-Z0-9\']/', '', $row['PRODCAT']));
             $SALESMAN = strtoupper($row['SALESMAN']);
             if (isset($row['SALESMAN'])) {
                 $DSMCODE = strtoupper(preg_replace('/\s+/', '', $row['DSMCODE']));
@@ -95,7 +95,7 @@
             $SL = array("CD1", "CD2", "ND1", "OSC", "OSN");
             $NL = array("DD1", "PD1", "PD2", "SD1", "OSP", "OSD");
             $MT = array("I97", "GB1", "GB2");
-            $GT = array("APX", "GBX", "GW1", "GX1", "GX2");
+            $GT = array("APX", "GBX", "GW1", "GX1", "GX2", "GMS", "OSE", "RB1");
             $V = array("BD1", "BX1", "LD1", "OD1", "TD1", "OSO", "OSL");
             $M = array("VD1", "VD2", "VD3", "YD1", "YX1", "ZD1", "OSA", "OSY", "OSZ", "OST");
             if (in_array($DSMCODE, $SL)) { $AREA = '1. SOUTH-LUZON'; }
@@ -116,12 +116,12 @@
             // gross net mecha
             $gross = $QTY_TO_SHIP * $PRICE_ORG;
             $net = $QTY_TO_SHIP *  $UNIT_PRICE;
-            if ($ITEMCAT == 'RTD') { $ITEMCAT = '1. RTD'; }
-            elseif ($ITEMCAT == 'DAIRY') { $ITEMCAT = '2. DAIRY'; }
-            elseif ($ITEMCAT == 'NCB & CSD') { $ITEMCAT = '3. NCB & CSD'; }
-            elseif ($ITEMCAT == 'NCBCSD') { $ITEMCAT = '3. NCB & CSD'; }
-            elseif ($ITEMCAT == 'FOOD') { $ITEMCAT = '4. FOOD'; }
-            elseif ($ITEMCAT == 'POWDER') { $ITEMCAT = '5. POWDER'; }
+            if ($PRODCAT == 'RTD') { $PRODCAT = '1. RTD'; }
+            elseif ($PRODCAT == 'DAIRY') { $PRODCAT = '2. DAIRY'; }
+            elseif ($PRODCAT == 'NCB & CSD') { $PRODCAT = '3. NCB & CSD'; }
+            elseif ($PRODCAT == 'NCBCSD') { $PRODCAT = '3. NCB & CSD'; }
+            elseif ($PRODCAT == 'FOOD') { $PRODCAT = '4. FOOD'; }
+            elseif ($PRODCAT == 'POWDER') { $PRODCAT = '5. POWDER'; }
             $output['data'][] = array(
                 "",
                 "$DATABASE_NO",

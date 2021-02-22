@@ -5,8 +5,8 @@
     $US = 40000000;
     $USE = 49999999;
     $DB = '1';
-    $S = 20201200;
-    $E = 20201299;
+    $S = 20200900;
+    $E = 20200999;
     $limit = '';
     $sql = "SELECT
     (SELECT os.ORDER_STATUS FROM oeordhdr os WHERE os.DB_NO = l.DB_NO AND os.ORDER_NO = l.ORDER_NO) AS ORDERSTATUS,
@@ -61,9 +61,9 @@
             $DSMCODE = strtoupper($row['DSMCODE']);
             $DSMDESC = strtoupper($row['DSMDESC']);
             $DSMSORT = $row['DSMSORT'];
-            $ITEMCAT = strtoupper($row['ITEMCAT']);
-            $INAME = strtoupper($row['INAME']);
-            $PRODCAT = strtoupper($row['PRODCAT']);
+            $ITEMCAT = strtoupper(preg_replace('/\s+/', ' ',$row['ITEMCAT']));
+            $INAME = strtoupper(preg_replace('/[^A-Za-z0-9-]/', '', $row['INAME']));
+            $PRODCAT = strtoupper(preg_replace('/\s+/', ' ',$row['PRODCAT']));
             $DB_NO = $row['DB_NO'];
             $ORDER_TYPE = strtoupper($row['ORDER_TYPE']);
             $ORDER_NO = $row['ORDER_NO'];
@@ -119,7 +119,7 @@
             $SL = array("CD1", "CD2", "ND1", "OSC", "OSN");
             $NL = array("DD1", "PD1", "PD2", "SD1", "OSP", "OSD");
             $MT = array("I97", "GB1", "GB2");
-            $GT = array("APX", "GBX", "GW1", "GX1", "GX2");
+            $GT = array("APX", "GBX", "GW1", "GX1", "GX2", "GMS", "OSE", "RB1");
             $V = array("BD1", "BX1", "LD1", "OD1", "TD1", "OSO", "OSL");
             $M = array("VD1", "VD2", "VD3", "YD1", "YX1", "ZD1", "OSA", "OSY", "OSZ", "OST");
             if (in_array($DSMCODE, $SL)) { $AREA = '1. SOUTH-LUZON'; }
@@ -148,8 +148,8 @@
                 "$ORDER_NO",
                 "$SEQUENCE_NO",
                 "$ITEM_NO",
-                "$PRODCAT",
                 "$ITEMCAT",
+                "$PRODCAT",
                 "$INAME",
                 "$LOCATION",
                 "$QTY_ORDERED",

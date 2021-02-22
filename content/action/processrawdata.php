@@ -339,9 +339,9 @@
 			$stmdupdelete->execute();
 		}
 		// noah oeordlin mecha
-		elseif (strpos($rawdata, 'oelinhst') === false AND strpos($rawdata, 'oehdrhst') === false AND strpos($rawdata, 'noah') !== false) {
-			$rowdata = explode('noah', $rawdata);
-		    $autodivide = substr_count($rawdata, "noah");
+		elseif (strpos($rawdata, 'oelinhst') === false AND strpos($rawdata, 'oehdrhst') === false AND strpos($rawdata, 'noahs') !== false) {
+			$rowdata = explode('noahs', $rawdata);
+		    $autodivide = substr_count($rawdata, "noahs");
 		    $runner = 0;
 		    $values = '';
 		    while ($runner < $autodivide) {
@@ -368,12 +368,12 @@
 				$QTY = str_replace(' ', '', $data[18]);
 				$AMOUNT = str_replace(' ', '', $data[19]);
 				$NET_AMOUNT = str_replace(' ', '', $data[20]);
-				$TRANSDATE = str_replace(' ', '', $data[21]);
+				$TRANSDATE = $data[21];
 				$NOAH_INV_NO = str_replace(' ', '', $data[22]);
 				$MANUAL_INV_NO = str_replace(' ', '', $data[23]);
-				$DATE_CONFIRMED = str_replace(' ', '', $data[24]);
+				$DATE_CONFIRMED = $data[24];
 				// checker
-				$sqlchecker = "SELECT id, DBNO FROM noah_oelinhst WHERE DBNO = '$DBNO' AND SKU = '$SKU' AND TAON = $TAON AND BUWAN = $BUWAN AND ARAW = $ARAW";
+				$sqlchecker = "SELECT id, DBNO FROM noah_oelinhst WHERE DBNO = '$DBNO' AND SKU = '$SKU' AND TRANSDATE = '$TRANSDATE' ";
 				$stmchecker = $con->prepare($sqlchecker);
 				$stmchecker->execute();
 				if ($stmchecker->rowCount() > 0) { $DBNO = "DUPLI" . $DBNO; }
